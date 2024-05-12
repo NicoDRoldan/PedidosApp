@@ -48,8 +48,23 @@ namespace PedidosApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nombre,Descripcion,Activo,FechaCreacion,Id_Rubro, Url_Imagen")] ArticuloModel articuloModel)
+        public async Task<IActionResult> Create([Bind("Nombre,Descripcion,Activo,Id_Rubro,Url_Imagen, Precio")] ArticuloModel articuloModel, IFormFile imagen)
         {
+            if(imagen != null)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + imagen.FileName;
+                var path = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await imagen.CopyToAsync(stream);
+                }
+
+                articuloModel.Url_Imagen = "/images/" + uniqueFileName;
+            }
+
+            articuloModel.FechaCreacion = DateTime.Now;
+
             _context.Add(articuloModel);
 
             Console.WriteLine(articuloModel.Id_Articulo);
