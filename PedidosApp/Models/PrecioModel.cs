@@ -9,6 +9,7 @@ namespace PedidosApp.Models
         [Key]
         public int Id_Articulo { get; set; }
 
+        [Column(TypeName = "decimal(18, 2)")]
         public decimal Precio { get; set; }
 
         [ForeignKey("Id_Articulo")]

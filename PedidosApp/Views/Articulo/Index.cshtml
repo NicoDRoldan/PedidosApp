@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<PedidosApp.Models.ArticuloModel>
+
+@{
     ViewData["Title"] = "Index";
     Layout = null;
 }
@@ -6,42 +8,71 @@
 <link href="~/css/styles.css" rel="stylesheet" />
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fast Food App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Pedidos APP</title>
 </head>
 <body>
+    <header>
+        <h1>Pedidos APP</h1>
+    </header>
+
+    <h1 class="titulo-menu">Menú de Pedido</h1>
+
     <div class="container">
-        <header>
-            <h1>Fast Food App</h1>
-        </header>
-        <main>
-            <section id="menu">
-                <h2>Menu</h2>
-                <div class="item">
-                    <img src="burger.jpg" alt="Burger">
-                    <h3>Burger</h3>
-                    <p>$5.99</p>
+
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-content">
+                    <h3>@item.Nombre</h3>
+                    <p>@item.Descripcion</p>
+                    <p>$@item.Precio.Precio.ToString("0.00")</p>
                     <button>Add to Cart</button>
                 </div>
-                <!-- More menu items here -->
-            </section>
-            <section id="cart">
-                <h2>Cart</h2>
-                <ul id="cart-items">
-                    <!-- Cart items will be dynamically added here -->
-                </ul>
-                <button id="checkout-btn">Checkout</button>
-            </section>
-        </main>
-        <footer>
-            <p>&copy; 2024 Fast Food App</p>
-        </footer>
+                <div class="card-image">
+                    <img src="https://www.shutterstock.com/shutterstock/photos/2282033179/display_1500/stock-photo-classic-hamburger-stock-photo-isolated-in-white-2282033179.jpg" alt="Imagen" class="image-art">
+                </div>
+            </div>
+        }
+
+        <!-- Agrega más tarjetas según sea necesario -->
+        <!-- Modal de Carrito -->
+        <div id="cartModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>Carrito de Compras</h2>
+                <p>Contenido del carrito aquí...</p>
+            </div>
+        </div>
+
+        <!-- Botón de Carrito -->
+        <button class="cart-button" id="cartButton">🛒</button>
     </div>
-    <script src="script.js"></script>
-    <script src="~/js/script.js"></script>
+
+    <footer>
+        <p>© 2024 Mi Restaurante</p>
+    </footer>
+
+    <script>
+        // Script para manejar la apertura y cierre del modal
+        var cartButton = document.getElementById('cartButton');
+        var cartModal = document.getElementById('cartModal');
+        var closeModal = document.getElementById('closeModal');
+
+        cartButton.onclick = function () {
+            cartModal.style.display = 'block';
+        }
+
+        closeModal.onclick = function () {
+            cartModal.style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == cartModal) {
+                cartModal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>

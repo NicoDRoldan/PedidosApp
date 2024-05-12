@@ -2,178 +2,119 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f8f8f8;
+}
+
+header {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-main {
-    display: flex;
-    justify-content: space-between;
-}
-
-section {
-    flex: 1;
-    margin-right: 20px;
-}
-
-.item {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-    .item img {
-        max-width: 100%;
-        margin-bottom: 10px;
-    }
-
-footer {
-    text-align: center;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #ccc;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-.productos {
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.producto {
-    width: 30%;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-    .producto img {
-        width: 100%;
-        height: auto;
-        margin-bottom: 10px;
-    }
-
-    .producto h3 {
-        font-size: 18px;
-        margin-bottom: 5px;
-    }
-
-    .producto p {
-        font-size: 14px;
-        line-height: 1.5;
-    }
-
-    .producto .precio {
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .producto .btn-agregar {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        text-decoration: none;
-    }
-.categorias {
-    padding: 20px;
-}
-
-    .categorias h2 {
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-
-    .categorias ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .categorias li {
-        display: inline-block;
-        margin-right: 20px;
-    }
-
-    .categorias a {
-        text-decoration: none;
-        color: #000;
-    }
-body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-header {
-    background-color: #fff;
-    padding: 20px;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-nav li {
-    margin-right: 20px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #000;
-}
-
-.banner {
-    background-image: url('banner.jpg');
-    background-size: cover;
-    height: 300px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    text-align: center;
-    color: #fff;
+    gap: 20px;
+    padding-bottom: 100px;
 }
 
+.card {
+    max-width: 350px;
+    /*max-height: 100%;*/
+    display: flex;
+    background-color: white;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-    .banner-texto {
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 20px;
+.card-content {
+    flex: 1;
+    width: 50%;
+}
+
+    .card-content hr{
+        color: #333;
     }
 
-    .banner h2 {
-        font-size: 24px;
-        margin-bottom: 10px;
+    .card-image {
+        margin-left: 20px; /* Espacio entre la parte de contenido y la imagen */
+        width: 50%;
     }
 
-    .banner p {
-        font-size: 16px;
-        line-height: 1.5;
+    .card-image img {
+        width: 100%;
+        height: 100%;
     }
 
-    .banner .btn-pedir {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
+
+.cart-button {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
         text-decoration: none;
+        cursor: pointer;
     }
+
+footer {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.titulo-menu {
+    text-align: center;
+    justify-content: center;
+    color: #333;
+}

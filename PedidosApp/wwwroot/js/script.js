@@ -1,30 +1,9 @@
-﻿// Simulated data for menu items
-const menuItems = [
-    { name: "Burger", price: 5.99 },
-    { name: "Fries", price: 2.99 },
-    { name: "Drink", price: 1.99 }
-];
+﻿// Agrega un evento de clic al botón del carrito para abrir el modal
+document.getElementById("cart-btn").addEventListener("click", function () {
+    document.getElementById("cart-modal").style.display = "block";
+});
 
-// Function to display menu items
-function displayMenuItems() {
-    const menuSection = document.getElementById("menu");
-    menuItems.forEach(item => {
-        const itemElement = document.createElement("div");
-        itemElement.classList.add("item");
-        itemElement.innerHTML = `
-            <img src="burger.jpg" alt="${item.name}">
-            <h3>${item.name}</h3>
-            <p>$${item.price}</p>
-            <button>Add to Cart</button>
-        `;
-        menuSection.appendChild(itemElement);
-    });
-}
-
-// Function to initialize the app
-function init() {
-    displayMenuItems();
-}
-
-// Initialize the app
-init();
+// Agrega un evento de clic para cerrar el modal cuando se hace clic en la "X"
+document.getElementsByClassName("close")[0].addEventListener("click", function () {
+    document.getElementById("cart-modal").style.display = "none";
+});
