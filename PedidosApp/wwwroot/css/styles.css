@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: Calibri;
     margin: 0;
     padding: 0;
     background-color: #f8f8f8;
@@ -126,3 +128,43 @@ footer {
     justify-content: center;
     color: #333;
 }
+
+/*MC*/
+.mcd-store-menu-category-item .mcd-store-menu-category-item__title--is-clamped {
+    text-overflow: ellipsis;
+    display: block;
+    height: 50px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.mcd-store-carousel-product-item .mcd-store-menu-category-item__title--is-clamped {
+    display: -webkit-box;
+    height: auto;
+}
+
+.mcd-store-carousel-product-item:hover {
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.mcd-store-menu-category-item .mcd-store-menu-category-item__title--is-clamped {
+    text-overflow: ellipsis;
+    display: block;
+    height: 50px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.mcd-store-menu-category-item__calories {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 16px;
+    width: 100%;
+    color: #292929;
+}
+
+    .mcd-store-menu-category-item__calories.is-hidden-touch {
+        margin-top: 10px;
+    }
