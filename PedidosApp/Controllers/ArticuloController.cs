@@ -19,13 +19,11 @@ namespace PedidosApp.Controllers
             _context = context;
         }
 
-        // GET: Articulo
         public async Task<IActionResult> Index()
         {
             return View(await _context.Articulos.Include(a => a.Precio).Where(a => a.Precio.Precio != null && a.Precio.Precio != 0).ToListAsync());
         }
 
-        // GET: Articulo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,18 +41,14 @@ namespace PedidosApp.Controllers
             return View(articuloModel);
         }
 
-        // GET: Articulo/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Articulo/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nombre,Descripcion,Activo,FechaCreacion,Id_Rubro")] ArticuloModel articuloModel)
+        public async Task<IActionResult> Create([Bind("Nombre,Descripcion,Activo,FechaCreacion,Id_Rubro, Url_Imagen")] ArticuloModel articuloModel)
         {
             _context.Add(articuloModel);
 
@@ -80,9 +74,6 @@ namespace PedidosApp.Controllers
             return View(articuloModel);
         }
 
-        // POST: Articulo/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id_Articulo,Nombre,Descripcion,Activo,FechaCreacion,Id_Rubro")] ArticuloModel articuloModel)
@@ -111,7 +102,6 @@ namespace PedidosApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Articulo/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -128,8 +118,7 @@ namespace PedidosApp.Controllers
 
             return View(articuloModel);
         }
-
-        // POST: Articulo/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

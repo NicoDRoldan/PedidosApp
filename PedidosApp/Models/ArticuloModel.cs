@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Policy;
 
 namespace PedidosApp.Models
 {
@@ -18,6 +19,8 @@ namespace PedidosApp.Models
         public DateTime FechaCreacion { get; set; }
 
         public int Id_Rubro { get; set; }
+
+        public string? Url_Imagen { get; set; }
 
         [ForeignKey("Id_Rubro")]
         public virtual RubroModel Rubro { get; set; }
