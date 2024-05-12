@@ -19,8 +19,9 @@ namespace PedidosApp.Models
 
         public int Id_Rubro { get; set; }
 
-        public virtual IEnumerable<RubroModel> Rubro { get; set; }
+        [ForeignKey("Id_Rubro")]
+        public virtual RubroModel Rubro { get; set; }
 
-        public virtual PrecioModel Precio { get; set; }
+        public virtual PrecioModel? Precio { get; set; }
     }
 }

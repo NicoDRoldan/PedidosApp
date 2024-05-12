@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<link href="~/css/styles.css" rel="stylesheet" />
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Food App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fast Food App</h1>
+        </header>
+        <main>
+            <section id="menu">
+                <h2>Menu</h2>
+                <div class="item">
+                    <img src="burger.jpg" alt="Burger">
+                    <h3>Burger</h3>
+                    <p>$5.99</p>
+                    <button>Add to Cart</button>
+                </div>
+                <!-- More menu items here -->
+            </section>
+            <section id="cart">
+                <h2>Cart</h2>
+                <ul id="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                </ul>
+                <button id="checkout-btn">Checkout</button>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 Fast Food App</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+    <script src="~/js/script.js"></script>
+</body>
+</html>

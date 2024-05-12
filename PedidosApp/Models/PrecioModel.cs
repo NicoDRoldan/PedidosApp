@@ -10,5 +10,8 @@ namespace PedidosApp.Models
         public int Id_Articulo { get; set; }
 
         public decimal Precio { get; set; }
+
+        [ForeignKey("Id_Articulo")]
+        public virtual ArticuloModel Articulo { get; set; }
     }
 }

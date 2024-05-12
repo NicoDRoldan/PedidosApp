@@ -26,6 +26,9 @@ namespace PedidosApp.Data
             modelBuilder.Entity<PedidoDetalleModel>()
                 .HasKey(pd => new { pd.NumPedido, pd.Renglon });
 
+            modelBuilder.Entity<PromocionDetalleModel>()
+                .HasKey(pd => new { pd.Id_Promocion, pd.Id_Articulo });
+
             base.OnModelCreating(modelBuilder);
         }
     }
