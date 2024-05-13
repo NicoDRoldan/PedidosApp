@@ -21,7 +21,7 @@ namespace PedidosApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Articulos.Include(a => a.Precio).Where(a => a.Precio.Precio != null && a.Precio.Precio != 0).ToListAsync());
+            return View(await _context.Articulos.Include(a => a.Precio).ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -66,8 +66,6 @@ namespace PedidosApp.Controllers
             articuloModel.FechaCreacion = DateTime.Now;
 
             _context.Add(articuloModel);
-
-            Console.WriteLine(articuloModel.Id_Articulo);
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

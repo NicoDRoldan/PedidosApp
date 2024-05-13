@@ -14,6 +14,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Id_Articulo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
@@ -28,12 +31,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.Rubro)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio.Precio)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Articulo)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
@@ -47,7 +56,10 @@
                 @Html.DisplayFor(modelItem => item.FechaCreacion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rubro.Id_Rubro)
+                @Html.DisplayFor(modelItem => item.Rubro.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio.Precio)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id_Articulo">Edit</a> |
