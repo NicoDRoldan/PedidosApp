@@ -1,0 +1,37 @@
+﻿@model PedidosApp.Models.CodigoRecuperacionModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<link href="~/css/recoverUserStyle.css" rel="stylesheet" />
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar contraseña</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Recuperar contraseña</h1>
+
+        <form id="formularioRecuperar">
+            <div class="campo">
+                <label for="codRecuperacion">Usuario:</label>
+                <input type="text" id="codRecuperacion" name="codRecuperacion" placeholder="Ingrese su Usuario" required>
+            </div>
+            <div class="campo">
+                <label for="codRecuperacion">Código de recuperación:</label>
+                <input type="text" id="codRecuperacion" name="codRecuperacion" placeholder="Ingrese su código de recuperación" required>
+            </div>
+
+            <button type="submit">Recuperar contraseña</button>
+        </form>
+
+        <p id="mensaje"></p>
+    </div>
+
+</body>
+</html>
