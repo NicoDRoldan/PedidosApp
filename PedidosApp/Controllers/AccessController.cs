@@ -65,6 +65,12 @@ namespace PedidosApp.Controllers
             return View();
         }
 
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Access");
+        }
+
         public IActionResult AccessDenied()
         {
             return View();
