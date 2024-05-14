@@ -48,7 +48,7 @@ namespace PedidosApp.Controllers
         // GET: Usuario/Create
         public IActionResult Create()
         {
-            ViewData["Id_Rol"] = new SelectList(_context.Rol, "Id_Rol", "Id_Rol");
+            ViewData["Id_Rol"] = new SelectList(_context.Rol, "Id_Rol", "Nombre");
             return View();
         }
 
@@ -59,10 +59,17 @@ namespace PedidosApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Usuario,Clave,Nombre,Apellido,Dni,Email,Telefono,Id_Direccion,Cod_Cliente,Id_Rol")] UsuarioModel usuarioModel)
         {
-            usuarioModel.Clave = BCrypt.Net.BCrypt.HashPassword(usuarioModel.Clave);
+            try
+            {
+                usuarioModel.Clave = BCrypt.Net.BCrypt.HashPassword(usuarioModel.Clave);
+                _context.Add(usuarioModel);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
 
-            _context.Add(usuarioModel);
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
@@ -79,7 +86,7 @@ namespace PedidosApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["Id_Rol"] = new SelectList(_context.Rol, "Id_Rol", "Id_Rol", usuarioModel.Id_Rol);
+            ViewData["Id_Rol"] = new SelectList(_context.Rol, "Id_Rol", "Nombre", usuarioModel.Id_Rol);
             return View(usuarioModel);
         }
 
@@ -115,7 +122,7 @@ namespace PedidosApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Id_Rol"] = new SelectList(_context.Rol, "Id_Rol", "Id_Rol", usuarioModel.Id_Rol);
+            ViewData["Id_Rol"] = new SelectList(_context.Rol, "Id_Rol", "Nombre", usuarioModel.Id_Rol);
             return View(usuarioModel);
         }
 
