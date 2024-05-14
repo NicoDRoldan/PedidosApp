@@ -33,10 +33,12 @@ namespace PedidosApp.Controllers
         {
             var user = await _context.Usuarios
                 .Include(u => u.Rol)
-                .Where(u => u.Usuario == loginModel.User && u.Clave == loginModel.Password)
+                .Where(u => u.Usuario == loginModel.User)
                 .FirstOrDefaultAsync();
 
-            if (user != null)
+            bool Hash = BCrypt.Net.BCrypt.Verify(loginModel.Password, user.Clave);
+
+            if (user != null && Hash)
             {
                 List<Claim> claims = new List<Claim>()
                     {
@@ -58,7 +60,6 @@ namespace PedidosApp.Controllers
                     new ClaimsPrincipal(claimsIdentity), properties);
 
                 return RedirectToAction("Index", "Home");
-
             }
 
             ModelState.AddModelError(string.Empty, "Por favor, corroborar los datos ingresados.");

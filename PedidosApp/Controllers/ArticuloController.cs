@@ -43,6 +43,7 @@ namespace PedidosApp.Controllers
             return View(articuloModel);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -50,6 +51,7 @@ namespace PedidosApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Nombre,Descripcion,Activo,Id_Rubro,Url_Imagen, Precio")] ArticuloModel articuloModel, IFormFile imagen)
         {
             if(imagen != null)
