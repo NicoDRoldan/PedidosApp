@@ -24,5 +24,9 @@ namespace PedidosApp.Models
         public int Id_Direccion { get; set; }
 
         public string Cod_Cliente { get; set; }
+
+        public int Id_Rol {  get; set; }
+
+        public virtual RolModel Rol { get; set; }
     }
 }

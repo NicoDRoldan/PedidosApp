@@ -20,6 +20,7 @@ namespace PedidosApp.Data
         public DbSet<PedidosApp.Models.SucursalModel> Sucursales { get; set; }
         public DbSet<PedidosApp.Models.TipoSucursalModel> TipoSucursal { get; set; }
         public DbSet<PedidosApp.Models.UsuarioModel> Usuarios { get; set; }
+        public DbSet<PedidosApp.Models.RolModel> Rol { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

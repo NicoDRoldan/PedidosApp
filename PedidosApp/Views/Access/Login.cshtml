@@ -1,0 +1,34 @@
+﻿@model PedidosApp.Models.LoginModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<link href="~/css/loginStyle.css" rel="stylesheet" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión</title>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Inicio de sesión</h1>
+        <form asp-controller="Access" asp-action="Login" method="post">
+            <div class="form-group">
+                <input asp-for="User"
+                       placeholder="Ingresar Usuario" style="width: 100%;">
+                <span asp-validation-for="User" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="password" asp-for="Password"
+                       placeholder="Contraseña" style="width: 100%;">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit">Iniciar sesión</button>
+        </form>
+        <p><a href="#">¿Olvidaste tu contraseña?</a></p>
+    </div>
+</body>
+</html>
