@@ -31,35 +31,35 @@ namespace PedidosApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login (LoginModel loginModel)
         {
-            var user = _context.Usuarios
+            var user = await _context.Usuarios
                 .Include(u => u.Rol)
                 .Where(u => u.Usuario == loginModel.User && u.Clave == loginModel.Password)
                 .FirstOrDefaultAsync();
 
-            //if (user != null)
-            //{
-            //    List<Claim> claims = new List<Claim>()
-            //        {
-            //            new Claim(ClaimTypes.NameIdentifier, loginModel.User),
-            //            new Claim(ClaimTypes.Role, user.ro),
-            //            new Claim("userid", user.Id_Usuario.ToString())
-            //        };
+            if (user != null)
+            {
+                List<Claim> claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, loginModel.User),
+                        new Claim(ClaimTypes.Role, user.Rol.Nombre),
+                        new Claim("userid", user.Usuario.ToString())
+                    };
 
-            //    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,
-            //        CookieAuthenticationDefaults.AuthenticationScheme);
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,
+                    CookieAuthenticationDefaults.AuthenticationScheme);
 
-            //    AuthenticationProperties properties = new AuthenticationProperties()
-            //    {
-            //        AllowRefresh = true,
-            //        IsPersistent = modelLogin.KeepLoggedIn,
-            //    };
+                AuthenticationProperties properties = new AuthenticationProperties()
+                {
+                    AllowRefresh = true,
+                    IsPersistent = loginModel.KeepLoggedIn,
+                };
 
-            //    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-            //        new ClaimsPrincipal(claimsIdentity), properties);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity), properties);
 
-            //    return RedirectToAction("Index", "Ventas");
+                return RedirectToAction("Index", "Home");
 
-            //}
+            }
 
             ModelState.AddModelError(string.Empty, "Por favor, corroborar los datos ingresados.");
             return View();

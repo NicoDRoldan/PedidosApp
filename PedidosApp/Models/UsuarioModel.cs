@@ -27,6 +27,7 @@ namespace PedidosApp.Models
 
         public int Id_Rol {  get; set; }
 
+        [ForeignKey ("Id_Rol")]
         public virtual RolModel Rol { get; set; }
     }
 }
