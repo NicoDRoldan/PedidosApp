@@ -31,10 +31,22 @@ namespace PedidosApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login (LoginModel loginModel)
         {
+            if(loginModel.User is null || loginModel.Password is null)
+            {
+                ModelState.AddModelError(string.Empty, "Por favor, corroborar los datos ingresados.");
+                return View();
+            }
+
             var user = await _context.Usuarios
                 .Include(u => u.Rol)
                 .Where(u => u.Usuario == loginModel.User)
                 .FirstOrDefaultAsync();
+
+            if(user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Por favor, corroborar los datos ingresados.");
+                return View();
+            }
 
             bool Hash = BCrypt.Net.BCrypt.Verify(loginModel.Password, user.Clave);
 
@@ -73,6 +85,16 @@ namespace PedidosApp.Controllers
         }
 
         public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        public IActionResult RecoverUser()
+        {
+            return View();
+        }
+
+        public IActionResult ChangePassword()
         {
             return View();
         }
