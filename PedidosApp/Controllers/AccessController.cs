@@ -89,6 +89,11 @@ namespace PedidosApp.Controllers
             return View();
         }
 
+        public IActionResult SendRecoverCode()
+        {
+            return View();
+        }
+
         public IActionResult RecoverUser()
         {
             return View();
