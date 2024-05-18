@@ -7,7 +7,7 @@
 
 <link href="~/css/recoverUserStyle.css" rel="stylesheet" />
 
-<html lang="es">
+<html >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,15 +19,11 @@
 
         <form id="formularioRecuperar">
             <div class="campo">
-                <label for="Usuario">Usuario:</label>
-                <input type="text" id="Usuario" name="Usuario" placeholder="Ingrese su Usuario" required>
-            </div>
-            <div class="campo">
-                <label for="codRecuperacion">Código de recuperación:</label>
-                <input type="text" id="codRecuperacion" name="codRecuperacion" placeholder="Ingrese su código de recuperación" required>
+                <label for="usuario">Usuario:</label>
+                <input type="usuario" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
             </div>
 
-            <button type="submit">Recuperar contraseña</button>
+            <button onclick="enviarCodRecuperacion()">Enviar código de Recuperación</button>
         </form>
 
         <p id="mensaje"></p>
@@ -35,3 +31,16 @@
 
 </body>
 </html>
+
+@section Scripts {
+
+    <script>
+
+        function enviarCodRecuperacion() {
+
+            var nomUsuario = $("#usuario").val();
+            console.log(nomUsuario);
+        }
+
+    </script>
+}

@@ -5,16 +5,19 @@ using PedidosApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using PedidosApp.Interfaces;
 
 namespace PedidosApp.Controllers
 {
     public class AccessController : Controller
     {
         private readonly PedidosAppContext _context;
+        private readonly IAccessService _accessService;
 
-        public AccessController(PedidosAppContext context)
+        public AccessController(PedidosAppContext context, IAccessService accessService)
         {
             _context = context;
+            _accessService = accessService;
         }
 
         public IActionResult Login()
@@ -84,7 +87,36 @@ namespace PedidosApp.Controllers
             return RedirectToAction("Login", "Access");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> SendEmailRecover(string usuario)
+        {
+            var usuarioEntity = await _context.Usuarios
+                .Where(u => u.Usuario == usuario)
+                .FirstOrDefaultAsync();
+
+            if(usuarioEntity == null)
+            {
+                return Ok(new { success = false, message = "Error, no existe el usuario." });
+            }
+
+            string result = await _accessService.SendEmailRecover(usuarioEntity.Email, usuarioEntity.Usuario);
+
+            if(result.Contains("Código enviado correctamente"))
+            {
+                return Ok(new { success = true, message = result });
+            }
+            else
+            {
+                return BadRequest(new { success = false, message = result });
+            }
+        }
+
         public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> SendRecoverCode()
         {
             return View();
         }
