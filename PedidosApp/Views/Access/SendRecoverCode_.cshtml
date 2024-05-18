@@ -1,0 +1,46 @@
+﻿@model PedidosApp.Models.CodigoRecuperacionModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<link href="~/css/recoverUserStyle.css" rel="stylesheet" />
+
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar contraseña</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Recuperar contraseña</h1>
+
+        <form id="formularioRecuperar">
+            <div class="campo">
+                <label for="usuario">Usuario:</label>
+                <input type="usuario" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
+            </div>
+
+            <button onclick="enviarCodRecuperacion()">Enviar código de Recuperación</button>
+        </form>
+
+        <p id="mensaje"></p>
+    </div>
+
+</body>
+</html>
+
+@section Scripts {
+
+    <script>
+
+        function enviarCodRecuperacion() {
+
+            var nomUsuario = $("#usuario").val();
+            console.log(nomUsuario);
+        }
+
+    </script>
+}

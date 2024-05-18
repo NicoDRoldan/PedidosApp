@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using PedidosApp.Data;
+using PedidosApp.Interfaces;
+using PedidosApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,11 +21,18 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         option.AccessDeniedPath = "/Access/AccessDenied";
     });
 
+builder.Services.AddScoped<IAccessService, AccessService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
     options.AddPolicy("UserOrAdmin", policy => policy.RequireRole("Admin", "User"));
+});
+
+// Crear HttpClient para llamado a apis:
+builder.Services.AddHttpClient("PedidosAppiClient", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7273/api");
 });
 
 var app = builder.Build();

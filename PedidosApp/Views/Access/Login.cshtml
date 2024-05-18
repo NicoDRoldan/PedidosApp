@@ -6,11 +6,7 @@
 }
 
 <link href="~/css/loginStyle.css" rel="stylesheet" />
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de sesión</title>
-</head>
+
 <body>
     <div class="contenedor">
         <h1>Inicio de sesión</h1>
@@ -28,7 +24,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <button type="submit">Iniciar sesión</button>
         </form>
-        <p><a asp-area="" asp-controller="Access" asp-action="SendRecoverCode">¿Olvidaste tu contraseña?</a></p>
+        <a asp-area="" asp-controller="Access" asp-action="SendRecoverCode">¿Olvidaste tu contraseña?</a>
     </div>
 </body>
 </html>

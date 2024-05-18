@@ -2,12 +2,12 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = null;
+    Layout = "_Layout2";
 }
 
 <link href="~/css/recoverUserStyle.css" rel="stylesheet" />
 
-<html lang="es">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,18 +17,50 @@
     <div class="container">
         <h1>Recuperar contraseña</h1>
 
-        <form id="formularioRecuperar">
             <div class="campo">
-                <label for="Email">Email:</label>
-                <input type="text" id="Email" name="Email" placeholder="Ingrese su Email" required>
+                <label for="usuario">Usuario:</label>
+                <input type="usuario" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
             </div>
 
-            <button type="submit">Enviar código de Recuperación</button>
-        </form>
+            <button onclick="enviarCodRecuperacion()">Enviar código de Recuperación</button>
+            <div id="mensaje" style="margin-top: 5px;"></div>
 
-        <p id="mensaje"></p>
     </div>
 
 </body>
 </html>
 
+@section Scripts {
+
+    <script>
+        function enviarCodRecuperacion() {
+            var usuario = $("#usuario").val();
+
+            if(usuario == ''){
+                $('#mensaje').removeClass().
+                    addClass('text-danger').text("Por favor ingresar su usuario.");
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("SendEmailRecover", "Access")',
+                type: 'POST',
+                data: { usuario },
+                success: function (response) {
+                    if (response.success) {
+                        $('#mensaje').removeClass().
+                            addClass('text-success').text(response.message);
+                    }
+                    else{
+                        $('#mensaje').removeClass().
+                            addClass('text-danger').text(response.message);
+                    }
+                },
+                error: function (response) {
+                    $('#mensaje').removeClass().
+                        addClass('text-danger').text("Error al mandar el correo." + response.message);
+                }
+            });
+        }
+    </script>
+}
