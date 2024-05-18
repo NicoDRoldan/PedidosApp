@@ -64,5 +64,5 @@ button {
     text-align: center;
     margin-top: 20px;
     font-weight: bold;
-    color: green; /* Cambiar color según el mensaje */
+    /*color: green;*/ /* Cambiar color según el mensaje */
 }
