@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = null;
+    Layout = "_Layout2";
 }
 
 <link href="~/css/recoverUserStyle.css" rel="stylesheet" />
@@ -17,21 +17,61 @@
     <div class="container">
         <h1>Recuperar contraseña</h1>
 
-        <form id="formularioRecuperar">
             <div class="campo">
                 <label for="Usuario">Usuario:</label>
-                <input type="text" id="Usuario" name="Usuario" placeholder="Ingrese su Usuario" required>
+                <input type="text" id="usuario" name="Usuario" placeholder="Ingrese su Usuario" required>
             </div>
             <div class="campo">
                 <label for="codRecuperacion">Código de recuperación:</label>
                 <input type="text" id="codRecuperacion" name="codRecuperacion" placeholder="Ingrese su código de recuperación" required>
             </div>
 
-            <button type="submit">Recuperar contraseña</button>
-        </form>
+            <button onclick="validateUser()">Recuperar contraseña</button>
 
-        <p id="mensaje"></p>
+        <div id="mensaje" style="margin-top: 5px;"></div>
     </div>
 
 </body>
 </html>
+
+@section Scripts{
+
+    <script>
+        function validateUser(){
+            var usuario = $("#usuario").val();
+            var codigoRecuperacion = $("#codRecuperacion").val();
+
+            console.log("Usuario: ", usuario);
+            console.log("Cod Recuperación: ", codigoRecuperacion);
+
+            if (usuario == '' || codigoRecuperacion == '') {
+                $('#mensaje').removeClass().
+                    addClass('text-danger').text("Por favor completar todos los campos.");
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("ValidateUser", "Access")',
+                type: 'POST',
+                data: { usuario, codigoRecuperacion },
+                success: function (response) {
+                    if (response.success) {
+                        console.log("ENTRE A SUCCESS TRUE");
+                        $('#mensaje').removeClass().
+                            addClass('text-success').text(response.message);
+                    }
+                    else {
+                        console.log("ENTRE A SUCCESS FALSE");
+                        $('#mensaje').removeClass().
+                            addClass('text-danger').text(response.message);
+                    }
+                },
+                error: function (response) {
+                    console.log("ENTRE A ERROR");
+                    $('#mensaje').removeClass().
+                        addClass('text-danger').text("Error al comunicarse con el servidor.");
+                }
+            });
+        }
+    </script>
+}

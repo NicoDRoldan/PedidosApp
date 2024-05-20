@@ -111,12 +111,27 @@ namespace PedidosApp.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ValidateUser(string usuario, string codigoRecuperacion)
+        {
+            var validationResult = await _accessService.ValidateUser(usuario, codigoRecuperacion);
+
+            if(validationResult.ContainsKey("success") && (bool)validationResult["success"])
+            {
+                return Ok(validationResult);
+            }
+            else
+            {
+                return Ok(validationResult);
+            }
+        }
+
         public IActionResult AccessDenied()
         {
             return View();
         }
 
-        public async Task<IActionResult> SendRecoverCode()
+        public IActionResult SendRecoverCode()
         {
             return View();
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using PedidosApp.Interfaces;
 
 namespace PedidosApp.Services
@@ -45,5 +46,39 @@ namespace PedidosApp.Services
 
             throw new NotImplementedException();
         }
+
+        public async Task<Dictionary<string, object>> ValidateUser(string usuario, string codigoRecuperacion)
+        {
+            try
+            {
+                var pedidosAppiClient = _httpClientFactory.CreateClient("PedidosAppiClient");
+                pedidosAppiClient.DefaultRequestHeaders.Accept.Clear();
+                pedidosAppiClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers
+                    .MediaTypeWithQualityHeaderValue("application/json"));
+
+                using (var formData = new MultipartFormDataContent())
+                {
+                    formData.Add(new StringContent(usuario), "user");
+                    formData.Add(new StringContent(codigoRecuperacion), "recoveryCode");
+
+                    var response = await pedidosAppiClient.PostAsync("api/sendEmail/ValidateUser", formData);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseContent);
+                        return result;
+                    }
+                    else
+                    {
+                        return new Dictionary<string, object> { { "success", false }, { "message", $"Error al validar el usuario." } };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Dictionary<string, object> { { "suceess", false }, { "message", $"Error: {ex.Message}" } };
+            }
+        }
+
     }
 }
