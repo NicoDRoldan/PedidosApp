@@ -118,7 +118,33 @@ namespace PedidosApp.Controllers
 
             if(validationResult.ContainsKey("success") && (bool)validationResult["success"])
             {
+                TempData["ValidatedUser"] = usuario;
+                return Ok(new
+                {
+                    success = true,
+                    message = validationResult["success"],
+                    redirectUrl = Url.Action("ChangePassword", "Access")
+                });
+            }
+            else
+            {
                 return Ok(validationResult);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(string user, string password)
+        {
+            var validationResult = await _accessService.ChangePassword(user, password);
+
+            if (validationResult.ContainsKey("success") && (bool)validationResult["success"])
+            {
+                return Ok(new
+                {
+                    success = true,
+                    message = validationResult["success"],
+                    redirectUrl = Url.Action("Login", "Access")
+                });
             }
             else
             {
@@ -143,7 +169,15 @@ namespace PedidosApp.Controllers
 
         public IActionResult ChangePassword()
         {
-            return View();
+            if (TempData.ContainsKey("ValidatedUser"))
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("RecoverUser", "Access");
+            }
+            
         }
     }
 }

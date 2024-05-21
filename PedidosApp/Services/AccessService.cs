@@ -61,7 +61,7 @@ namespace PedidosApp.Services
                     formData.Add(new StringContent(usuario), "user");
                     formData.Add(new StringContent(codigoRecuperacion), "recoveryCode");
 
-                    var response = await pedidosAppiClient.PostAsync("api/sendEmail/ValidateUser", formData);
+                    var response = await pedidosAppiClient.PostAsync("api/UserManager/ValidateUser", formData);
                     if (response.IsSuccessStatusCode)
                     {
                         var responseContent = await response.Content.ReadAsStringAsync();
@@ -80,5 +80,37 @@ namespace PedidosApp.Services
             }
         }
 
+        public async Task<Dictionary<string, object>> ChangePassword(string user, string password)
+        {
+            try
+            {
+                var pedidosAppiClient = _httpClientFactory.CreateClient("PedidosAppiClient");
+                pedidosAppiClient.DefaultRequestHeaders.Accept.Clear();
+                pedidosAppiClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers
+                    .MediaTypeWithQualityHeaderValue("application/json"));
+
+                using (var formData = new MultipartFormDataContent())
+                {
+                    formData.Add(new StringContent(user), "user");
+                    formData.Add(new StringContent(password), "password");
+
+                    var response = await pedidosAppiClient.PostAsync("api/UserManager/ChangePassword", formData);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseContent);
+                        return result;
+                    }
+                    else
+                    {
+                        return new Dictionary<string, object> { { "success", false }, { "message", $"Error al cambiar la contraseña." } };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Dictionary<string, object> { { "suceess", false }, { "message", $"Error: {ex.Message}" } };
+            }
+        }
     }
 }

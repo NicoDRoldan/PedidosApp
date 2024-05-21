@@ -59,6 +59,7 @@
                         console.log("ENTRE A SUCCESS TRUE");
                         $('#mensaje').removeClass().
                             addClass('text-success').text(response.message);
+                        window.location.href = response.redirectUrl;
                     }
                     else {
                         console.log("ENTRE A SUCCESS FALSE");
