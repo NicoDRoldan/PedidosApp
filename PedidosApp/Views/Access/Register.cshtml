@@ -1,0 +1,90 @@
+﻿@model PedidosApp.Models.UsuarioModel
+
+@{
+    ViewData["Title"] = "Registro";
+    Layout = "_Layout2";
+
+}
+
+<link href="~/css/registerStyle.css" rel="stylesheet" />
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro</h1>
+
+        <form asp-action="Register">
+            <div class="campo">
+                <label asp-for="Usuario" class="control-label"></label>
+                <input asp-for="Usuario" class="form-control" />
+                <span asp-validation-for="Usuario" class="text-danger"></span>
+            </div>
+            <div class="campo">
+                <label asp-for="Clave" class="control-label"></label>
+                <input asp-for="Clave" type="password" class="form-control" />
+                <span asp-validation-for="Clave" class="text-danger"></span>
+            </div>
+            <div class="campo">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="campo">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="campo">
+                <label asp-for="Dni" class="control-label"></label>
+                <input asp-for="Dni" class="form-control" />
+                <span asp-validation-for="Dni" class="text-danger"></span>
+            </div>
+            <div class="campo">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="campo">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="campo">
+                <label asp-for="Calle" class="control-label"></label>
+                <input asp-for="Calle" class="form-control" />
+                <span asp-validation-for="Calle" class="text-danger"></span>
+            </div>
+            <div class="campo">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" class="form-control" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            <div class="campo">
+                <label asp-for="Id_Provincia" class="control-label">Provincia</label>
+                <select asp-for="Id_Provincia" class="form-control" asp-items="ViewBag.Id_Provincia"></select>
+                <span asp-validation-for="Id_Provincia" class="text-danger"></span>
+            </div>
+            <div class="campo">
+                <label asp-for="Id_Localidad" class="control-label">Localidad</label>
+                <select asp-for="Id_Localidad" class="form-control" asp-items="ViewBag.Id_Localidad"></select>
+                <span asp-validation-for="Id_Localidad" class="text-danger"></span>
+            </div>
+            
+            <div class="campo text-center">
+                @* <input type="submit" value="Registrarse" class="btn btn-primary btn-block" /> *@
+                <button>Registrarse</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -3,7 +3,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
@@ -64,5 +63,5 @@ button {
     text-align: center;
     margin-top: 20px;
     font-weight: bold;
-    /*color: green;*/ /* Cambiar color según el mensaje */
+    color: green; /* Cambiar color según el mensaje */
 }

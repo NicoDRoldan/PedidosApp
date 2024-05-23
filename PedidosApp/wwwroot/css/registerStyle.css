@@ -1,15 +1,15 @@
 body {
     font-family: sans-serif;
     margin: 0;
-    padding: 0;
     background-color: #f4f4f4;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    padding-top: 200px !important;
 }
 
 .container {
-    width: 400px;
+    width: 600px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -33,7 +33,7 @@ label {
 }
 
 input {
-    width: 100%;
+    width: 50px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;

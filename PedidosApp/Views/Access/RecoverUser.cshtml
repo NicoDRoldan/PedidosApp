@@ -7,32 +7,19 @@
 
 <link href="~/css/recoverUserStyle.css" rel="stylesheet" />
 
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar contraseña</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Recuperar contraseña</h1>
-
-            <div class="campo">
-                <label for="Usuario">Usuario:</label>
-                <input type="text" id="usuario" name="Usuario" placeholder="Ingrese su Usuario" required>
-            </div>
-            <div class="campo">
-                <label for="codRecuperacion">Código de recuperación:</label>
-                <input type="text" id="codRecuperacion" name="codRecuperacion" placeholder="Ingrese su código de recuperación" required>
-            </div>
-
-            <button onclick="validateUser()">Recuperar contraseña</button>
-
-        <div id="mensaje" style="margin-top: 5px;"></div>
+<div class="container">
+    <h1>Recuperar contraseña</h1>
+    <div class="campo">
+        <label for="Usuario">Usuario:</label>
+        <input type="text" id="usuario" name="Usuario" placeholder="Ingrese su Usuario" required>
     </div>
-
-</body>
-</html>
+    <div class="campo">
+        <label for="codRecuperacion">Código de recuperación:</label>
+        <input type="text" id="codRecuperacion" name="codRecuperacion" placeholder="Ingrese su código de recuperación" required>
+    </div>
+    <button onclick="validateUser()">Recuperar contraseña</button>
+    <div id="mensaje" style="margin-top: 5px;"></div>
+</div>
 
 @section Scripts{
 

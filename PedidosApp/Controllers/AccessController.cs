@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using PedidosApp.Interfaces;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace PedidosApp.Controllers
 {
@@ -150,6 +152,46 @@ namespace PedidosApp.Controllers
             {
                 return Ok(validationResult);
             }
+        }
+
+        public IActionResult Register()
+        {
+            ViewData["Id_Provincia"] = new SelectList(_context.Provincias, "Id_Provincia", "Nombre");
+            ViewData["Id_Localidad"] = new SelectList(_context.Localidades, "Id_Localidad", "Nombre");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([Bind("Usuario,Clave,Nombre,Apellido,Dni,Email,Telefono,Calle,Numero,Id_Provincia,Id_Localidad")] 
+                                                        UsuarioModel usuarioModel)
+        {
+            try
+            {
+                usuarioModel.Clave = BCrypt.Net.BCrypt.HashPassword(usuarioModel.Clave);
+                usuarioModel.Cod_Cliente = usuarioModel.Dni;
+                usuarioModel.Id_Rol = 2;
+
+                var direccion = new DireccionModel
+                {
+                    Calle = usuarioModel.Calle,
+                    Numero = usuarioModel.Numero,
+                    Id_Provincia = usuarioModel.Id_Provincia,
+                    Id_Localidad = usuarioModel.Id_Localidad
+                };
+                _context.Add(direccion);
+
+                usuarioModel.Direccion = direccion;
+
+                _context.Add(usuarioModel);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+
+            return RedirectToAction("Login","Access");
         }
 
         public IActionResult AccessDenied()

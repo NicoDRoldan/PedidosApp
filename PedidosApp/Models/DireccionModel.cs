@@ -17,8 +17,11 @@ namespace PedidosApp.Models
 
         public int Id_Localidad { get; set; }
 
+
+        [ForeignKey("Id_Provincia")]
         public virtual ProvinciaModel ProvinciaModel { get; set; }
 
+        [ForeignKey("Id_Localidad")]
         public virtual LocalidadModel LocalidadModel { get; set; }
     }
 }
