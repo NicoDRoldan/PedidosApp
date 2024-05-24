@@ -1,16 +1,16 @@
 ﻿@model PedidosApp.Models.ArticuloModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Artículo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Edit</h1>
-
-<h4>ArticuloModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<link href="~/css/editstyle.css" rel="stylesheet" />
+<div class="card shadow mb-4 custom-card">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Editar Artículo</h6>
+        <a class="btn btn-primary btn-sm" asp-action="Index">Volver a la Lista</a>
+    </div>
+    <div class="card-body">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id_Articulo" />
@@ -25,9 +25,8 @@
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
-                </label>
+                <input class="form-check-input" asp-for="Activo" />
+                <label class="form-check-label" asp-for="Activo"></label>
             </div>
             <div class="form-group">
                 <label asp-for="FechaCreacion" class="control-label"></label>
@@ -40,16 +39,15 @@
                 <span asp-validation-for="Id_Rubro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -23,7 +23,7 @@ namespace PedidosApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Articulos.Include(a => a.Precio).ToListAsync());
+            return View(await _context.Articulos.Include(a => a.Precio).Include(a => a.Rubro).ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
