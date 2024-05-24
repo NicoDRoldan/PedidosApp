@@ -2,10 +2,10 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "_Layout3";
+    Layout = null;
 }
 
-<link href="~/css/stylesHome.css" rel="stylesheet" />
+<link href="~/css/styles.css" rel="stylesheet" />
 
 <!DOCTYPE html>
 <html>
@@ -13,6 +13,16 @@
     <title>Pedidos APP</title>
 </head>
 <body>
+    <header>
+        <a class="navbar-brand" asp-controller="Access" asp-action="Login">
+            <img class="image-logo" src="@Url.Content("~/logos/PedidosApp-Logo.png")" alt="PedidosApp" />
+        </a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Articulo" asp-action="Create">Alta Artículo</a>
+        <a class="dropdown-item" asp-area="" asp-controller="Access" asp-action="LogOut">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+            Logout
+        </a>
+    </header>
 
     <h1 class="titulo-menu">Menú de Pedido</h1>
 
@@ -64,11 +74,16 @@
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
             <h2>Carrito de Compras</h2>
+            
         </div>
     </div>
 
     <!-- Botón de Carrito -->
     <button class="cart-button" id="cartButton">🛒</button>
+
+    <footer>
+        <p>© 2024 Mi Restaurante</p>
+    </footer>
 
     <script>
         // Script para manejar la apertura y cierre del modal

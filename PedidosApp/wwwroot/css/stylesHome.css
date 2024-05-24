@@ -8,9 +8,6 @@ body {
 }
 
 header {
-    background-color: red;
-    color: white;
-    padding: 10px 20px;
     text-align: center;
 }
 
@@ -70,7 +67,7 @@ header {
     position: fixed;
     bottom: 80px;
     right: 20px;
-    background-color: #f44336;
+    background-color: #E23E57;
     color: white;
     border: none;
     border-radius: 50%;
@@ -96,7 +93,6 @@ header {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
     width: 80%;
     max-width: 400px;
     border-radius: 5px;
@@ -115,16 +111,6 @@ header {
         text-decoration: none;
         cursor: pointer;
     }
-
-footer {
-    background-color: red;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
 
 .titulo-menu {
     text-align: center;

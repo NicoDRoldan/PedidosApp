@@ -1,12 +1,14 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PedidosApp</title>
-    <link href="~/css/layoutstyle.css" rel="stylesheet" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/css/layout3style.css" rel="stylesheet" />
+
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,11 +20,6 @@
             </div>
         </nav>
     </header>
-    <div class="container mt-5">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -38,6 +35,12 @@
         <a asp-controller="Access" asp-action="LogOut" class="logout-button">Logout</a> <!-- Enlace para Logout -->
     </div>
 
+    @RenderBody()
+
+    @*     <footer>
+    © 2024 Pedidos APP
+    </footer> *@
+
     <script>
         function openNav() {
             document.getElementById("mySidebar").style.width = "250px";
@@ -47,6 +50,7 @@
             document.getElementById("mySidebar").style.width = "0";
         }
 
+        // Script para manejar los dropdowns con animaciones
         document.addEventListener("DOMContentLoaded", function () {
             var dropdowns = document.getElementsByClassName("dropdown-btn");
             for (var i = 0; i < dropdowns.length; i++) {
@@ -62,9 +66,11 @@
             }
         });
     </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

@@ -1,12 +1,14 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PedidosApp</title>
-    <link href="~/css/layoutstyle.css" rel="stylesheet" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/css/layout3style.css" rel="stylesheet" />
+
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,25 +20,22 @@
             </div>
         </nav>
     </header>
-    <div class="container mt-5">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#" class="dropdown-btn">Artículos</a>
-        <div class="dropdown-container">
-            <a asp-controller="Articulo" asp-action="Index">Lista Artículos</a>
-            <a asp-controller="Articulo" asp-action="Create">Crear Artículo</a>
-        </div>
+        <a href="#">Artículos</a>
         <a href="#">Carrito</a>
         <a href="#">Pedidos</a>
         <a href="#">Perfil</a>
         <a href="#">Configuración</a>
         <a asp-controller="Access" asp-action="LogOut" class="logout-button">Logout</a> <!-- Enlace para Logout -->
     </div>
+
+    @RenderBody()
+
+    <footer>
+        © 2024 Pedidos APP
+    </footer>
 
     <script>
         function openNav() {
@@ -46,25 +45,12 @@
         function closeNav() {
             document.getElementById("mySidebar").style.width = "0";
         }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            var dropdowns = document.getElementsByClassName("dropdown-btn");
-            for (var i = 0; i < dropdowns.length; i++) {
-                dropdowns[i].addEventListener("click", function () {
-                    this.classList.toggle("active");
-                    var dropdownContent = this.nextElementSibling;
-                    if (dropdownContent.style.maxHeight) {
-                        dropdownContent.style.maxHeight = null;
-                    } else {
-                        dropdownContent.style.maxHeight = dropdownContent.scrollHeight + "px";
-                    }
-                });
-            }
-        });
     </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

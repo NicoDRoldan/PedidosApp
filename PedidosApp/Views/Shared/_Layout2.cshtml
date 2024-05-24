@@ -13,30 +13,45 @@
             margin: 0;
         }
 
+        .bg-light{
+            background-color: #F4F4F4 !important;
+        }
+
         .main-content {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            justify-content: center; /* Centrar verticalmente */
+            align-items: center; /* Centrar horizontalmente */
             padding-top: 56px; /* Ajuste para la altura del navbar */
+            padding-bottom: 20px; /* Espacio en la parte inferior */
+            min-height: 100vh; /* Altura mínima del contenedor */
         }
+
 
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow effect */
         }
+
+        .image-logo{
+            width:200px;
+            margin-left:20px;
+        }
+
     </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" asp-controller="Access" asp-action="Login">PedidosApp</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" asp-controller="Access" asp-action="Login">
+                <img class="image-logo" src="@Url.Content("~/logos/PedidosApp-Logo.png")" alt="PedidosApp"/>
+            </a>
+            @* <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> *@
 @*             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
