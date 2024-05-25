@@ -59,3 +59,7 @@
 .form-check-label {
     margin-left: 1.25rem;
 }
+
+.text-primary{
+    color: white !important;
+}

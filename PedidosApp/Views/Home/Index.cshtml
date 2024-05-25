@@ -4,8 +4,8 @@
     ViewData["Title"] = "Index";
     Layout = "_Layout3";
 }
-
-<link href="~/css/stylesHome.css" rel="stylesheet" />
+<link href="~/css/home/styleshome.css" rel="stylesheet" />
+<link href="~/css/home/stylescarritohome.css" rel="stylesheet" />
 
 <!DOCTYPE html>
 <html>
@@ -21,15 +21,15 @@
         <div class="container">
             @foreach (var item in Model)
             {
-                <a>
-                    <div class="card">
+                <a onclick="addToCart(@item.Id_Articulo, '@item.Nombre', @item.Precio.Precio)">
+                    <div class="card" id="card-@item.Id_Articulo">
                         <div class="card-content">
                             <h3>@item.Nombre</h3>
                             <div class="mcd-store-menu-category-item__title mcd-store-menu-category-item__title--is-clamped">@item.Descripcion</div>
                             <div class="mcd-store-menu-category-item__calories">$@item.Precio.Precio.ToString("0.00")</div>
                         </div>
                         <div class="card-image">
-                            <img src="@item.Url_Imagen" alt="Imagen" class="image-art">
+                            <img src="@item.Url_Imagen" alt="Imagen" class="image-art" data-url="@item.Url_Imagen">
                         </div>
                     </div>
                 </a>
@@ -37,33 +37,19 @@
         </div>
     </section>
 
-    <section class="container--section">
-        <h2 class="mcd-store-category-carousel-title">Novedades</h2>
-        <div class="container">
-            @foreach (var item in Model)
-            {
-                <a>
-                    <div class="card">
-                        <div class="card-content">
-                            <h3>@item.Nombre</h3>
-                            <div class="mcd-store-menu-category-item__title mcd-store-menu-category-item__title--is-clamped">@item.Descripcion</div>
-                            <div class="mcd-store-menu-category-item__calories">$@item.Precio.Precio.ToString("0.00")</div>
-                        </div>
-                        <div class="card-image">
-                            <img src="@item.Url_Imagen" alt="Imagen" class="image-art">
-                        </div>
-                    </div>
-                </a>
-            }
-        </div>
-    </section>
-
-    <!-- Agrega más tarjetas según sea necesario -->
     <!-- Modal de Carrito -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
-            <h2>Carrito de Compras</h2>
+            <div class="modal-header">
+                <h2>Carrito de Compras</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems"></div>
+            </div>
+            <div class="modal-footer">
+                <h3 id ="totalAmount">Total: $0.00</h3>
+            </div>
         </div>
     </div>
 
@@ -92,3 +78,103 @@
     </script>
 </body>
 </html>
+
+@section Scripts{
+    <script>
+        
+        // Script para manejar la apertura y cierre del modal
+        var cartButton = document.getElementById('cartButton');
+        var cartModal = document.getElementById('cartModal');
+        var closeModal = document.getElementById('closeModal');
+
+        cartButton.onclick = function () {
+            displayCart();
+            cartModal.style.display = 'block';
+        }
+
+        closeModal.onclick = function () {
+            cartModal.style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == cartModal) {
+                cartModal.style.display = 'none';
+            }
+        }
+
+        function addToCart(id, name, price) {
+
+            var imageUrl = document.querySelector(`#card-${id} .image-art`).getAttribute('data-url');
+
+            console.log("ID: ", id);
+            console.log("name: ", name);
+            console.log("price: ", price);
+            console.log("imageUrl: ", imageUrl);
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let existingItem = cart.find(item => item.id === id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id, name, price, imageUrl, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                let itemTotal = item.quantity * item.price;
+                total += itemTotal;
+                cartItemsContainer.innerHTML += `
+                        <div class="card-cart">
+                            <div class="card-cart-content">
+                                <div class="card-cart-text">
+                                    <h3>${item.name}</h3>
+                                    <p>Precio: $${item.price.toFixed(2)}</p>
+                                    <p>Cantidad: ${item.quantity}</p>
+                                    <p>Total: $${itemTotal.toFixed(2)}</p>
+                                    <button onclick="updateItemQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                    <button onclick="updateItemQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                                    <button onclick="removeFromCart(${item.id})">Eliminar</button>
+                                </div>
+                                <div class="card-cart-image">
+                                    <img src="${item.imageUrl}" alt="${item.name}" class="cart-item-image">
+                                </div>
+                            </div>
+                        </div>
+                        `;
+            });
+
+            totalAmount.innerText = `Total: $${total.toFixed(2)}`;
+        }
+
+        function updateItemQuantity(id, quantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let item = cart.find(item => item.id === id);
+
+            if (item) {
+                item.quantity = quantity;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(item => item.id !== id);
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+            }
+        }
+
+        function removeFromCart(id) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+    </script>
+}

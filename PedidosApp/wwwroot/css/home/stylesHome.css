@@ -22,6 +22,11 @@ header {
     padding-bottom: 100px;
 }
 
+    .container a {
+        text-decoration: none !important;
+        color: black !important;
+    }
+
 .container--section {
     max-width: 1500px;
     margin: 0 auto;
@@ -92,7 +97,6 @@ header {
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
-    padding: 20px;
     width: 80%;
     max-width: 400px;
     border-radius: 5px;
