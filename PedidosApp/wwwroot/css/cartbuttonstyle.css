@@ -1,0 +1,17 @@
+.cart-button:hover {
+    background-color: #0056b3;
+}
+
+.cart-button {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: #E23E57;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+}
