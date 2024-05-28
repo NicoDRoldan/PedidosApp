@@ -29,10 +29,16 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("UserOrAdmin", policy => policy.RequireRole("Admin", "User"));
 });
 
-// Crear HttpClient para llamado a apis:
+// Crear HttpClient para llamado a Api de PedidosAppi:
 builder.Services.AddHttpClient("PedidosAppiClient", client =>
 {
     client.BaseAddress = new Uri("https://localhost:7273/api");
+});
+
+// Crear HttpClient para llamado a WebService de Cupones:
+builder.Services.AddHttpClient("WSCuponesClient", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7159/api");
 });
 
 var app = builder.Build();
@@ -52,6 +58,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Access}/{action=Login}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

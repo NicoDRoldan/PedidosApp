@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,7 +16,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <span class="menu-button" onclick="openNav()">&#9776;</span>
             <div class="navbar-brand">
-                <a asp-controller="Access" asp-action="Login">
+                <a asp-controller="Home" asp-action="Index">
                     <img class="image-logo" src="@Url.Content("~/logos/PedidosApp-LogoGrande.png")" alt="PedidosApp" />
                 </a>
             </div>
@@ -33,11 +35,20 @@
             <a asp-controller="Articulo" asp-action="Index">Lista Artículos</a>
             <a asp-controller="Articulo" asp-action="Create">Crear Artículo</a>
         </div>
+        <a asp-controller="Cupones" asp-action="Index">Cupones</a>
         <a href="#">Carrito</a>
         <a href="#">Pedidos</a>
         <a href="#">Perfil</a>
         <a href="#">Configuración</a>
-        <a asp-controller="Access" asp-action="LogOut" class="logout-button">Logout</a> <!-- Enlace para Logout -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Access" asp-action="LogOut" class="logout-button">Cerrar Sesión</a> <!-- Enlace para Logout -->
+        }
+        else
+        {
+            <a asp-controller="Access" asp-action="Login" class="logout-button">Iniciar Sesión</a> <!-- Enlace para Login -->
+            <a asp-controller="Access" asp-action="Register" class="logout-button">Registrarse</a> <!-- Enlace para Logout -->
+        }
     </div>
 
     <script>

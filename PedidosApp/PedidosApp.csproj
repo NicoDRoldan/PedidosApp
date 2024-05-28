@@ -22,4 +22,8 @@
     <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Carrito\" />
+  </ItemGroup>
+
 </Project>

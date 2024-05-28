@@ -1,0 +1,91 @@
+﻿@model IEnumerable<PedidosApp.Models.CuponModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout3";
+}
+<link href="~/css/cupones/stylesCupones.css" rel="stylesheet" />
+<link href="~/css/cupones/stylescarritocupones.css" rel="stylesheet" />
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pedidos APP</title>
+</head>
+<body>
+    <h1 class="titulo-menu">Cupones</h1>
+
+    <section class="container--section">
+        <h2 class="">Promociones</h2>
+        <div class="container">
+            @foreach (var item in Model)
+            {
+                <a>
+                    <div class="card" id="card-@item.Id_Cupon">
+                        <div class="card-content">
+                            @* <h3>@item.</h3> *@
+                            <div class="mcd-store-menu-category-item__title mcd-store-menu-category-item__title--is-clamped">@item.Descripcion</div>
+                            <div class="mcd-store-menu-category-item__calories">$@item.PorcentajeDto.ToString("0.00")</div>
+                        </div>
+                        <div class="card-image">
+                            <img src="https://images.deliveryhero.io/image/pedidosya/products/ee74ed03-e61b-4571-b783-3636c44ae512.png?quality=90&width=1920&webp=1" alt="Imagen"
+                            class="image-art" data-url="https://images.deliveryhero.io/image/pedidosya/products/ee74ed03-e61b-4571-b783-3636c44ae512.png?quality=90&width=1920&webp=1">
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </section>
+
+    <section class="container--section">
+        <h2 class="">Descuentos</h2>
+        <div class="container">
+            @foreach (var item in Model)
+            {
+                <a>
+                    <div class="card" id="card-@item.Id_Cupon">
+                        <div class="card-content">
+                            @* <h3>@item.</h3> *@
+                            <div class="mcd-store-menu-category-item__title mcd-store-menu-category-item__title--is-clamped">@item.Descripcion</div>
+                            <div class="mcd-store-menu-category-item__calories">$@item.PorcentajeDto.ToString("0.00")</div>
+                        </div>
+                        <div class="card-image">
+                            <img src="https://images.deliveryhero.io/image/pedidosya/products/ee74ed03-e61b-4571-b783-3636c44ae512.png?quality=90&width=1920&webp=1" alt="Imagen"
+                                 class="image-art" data-url="https://images.deliveryhero.io/image/pedidosya/products/ee74ed03-e61b-4571-b783-3636c44ae512.png?quality=90&width=1920&webp=1">
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </section>
+
+    <!-- Modal de Carrito -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Carrito de Compras</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems"></div>
+            </div>
+            <div class="modal-footer">
+                <div id="totalContainer">
+                    <h3 id="totalAmount">Total: $0.00</h3>
+                </div>
+                <div id="payButtonContainer">
+                    <button id="payButton" class="pay-button">PAGAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Carrito -->
+    <button class="cart-button" id="cartButton">🛒<span id="cartCount" class="cart-count">0</span></button>
+
+</body>
+</html>
+
+@* @section Scripts {
+    <script src="~/js/carritoscript.js"></script>
+} *@
