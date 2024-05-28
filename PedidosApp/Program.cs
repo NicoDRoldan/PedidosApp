@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using PedidosApp.Data;
 using PedidosApp.Interfaces;
 using PedidosApp.Services;
+using Polly;
+using Polly.Extensions.Http;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +42,9 @@ builder.Services.AddHttpClient("PedidosAppiClient", client =>
 builder.Services.AddHttpClient("WSCuponesClient", client =>
 {
     client.BaseAddress = new Uri("https://localhost:7159/api");
-});
+    })
+    .AddPolicyHandler(GetRetryPolicy())
+    .AddPolicyHandler(GetCircuitBreakerPolicy());
 
 var app = builder.Build();
 
@@ -61,3 +66,22 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+{
+    return HttpPolicyExtensions
+        .HandleTransientHttpError()
+        .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.NotFound)
+        .WaitAndRetryAsync(2, retryAttemp => TimeSpan.FromSeconds(10),
+        onRetry: (outcome, timespan, retryAttemp, context) =>
+        {
+            Debug.WriteLine($"Reintentando... Intento: {retryAttemp}");
+        });
+}
+
+IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy()
+{
+    return HttpPolicyExtensions
+        .HandleTransientHttpError()
+        .CircuitBreakerAsync(2, TimeSpan.FromMinutes(1));
+}
