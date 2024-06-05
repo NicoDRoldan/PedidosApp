@@ -6,7 +6,6 @@
 }
 <link href="~/css/cupones/stylesCupones.css" rel="stylesheet" />
 <link href="~/css/cupones/stylescarritocupones.css" rel="stylesheet" />
-<link href="~/css/cupones/stylescuponesconfirmation.css" rel="stylesheet" />
 
 <!DOCTYPE html>
 <html>
@@ -25,13 +24,12 @@
                     <div class="card" id="card-@item.Id_Cupon">
                         <div class="card-content">
                             @* <h3>@item.</h3> *@
-                            <div class="discount-circle">@item.PorcentajeDto.ToString("0")%</div>
                             <div class="mcd-store-menu-category-item__title mcd-store-menu-category-item__title--is-clamped">@item.Descripcion</div>
                             <div class="mcd-store-menu-category-item__calories">$@item.PorcentajeDto.ToString("0.00")</div>
                         </div>
                         <div class="card-image">
-                            <img src="@item.Url_Imagen" alt="Imagen"
-                                 class="image-art" data-url="@item.Url_Imagen">
+                            <img src="https://images.deliveryhero.io/image/pedidosya/products/ee74ed03-e61b-4571-b783-3636c44ae512.png?quality=90&width=1920&webp=1" alt="Imagen"
+                            class="image-art" data-url="https://images.deliveryhero.io/image/pedidosya/products/ee74ed03-e61b-4571-b783-3636c44ae512.png?quality=90&width=1920&webp=1">
                         </div>
                     </div>
                 </a>
@@ -60,44 +58,8 @@
         </div>
     </div>
 
-    <!-- Modal de Cupón Agregado -->
-    <div id="couponAddedModal" class="modal">
-        <div class="modal-content">
-                <div class="checkmark">✔️</div>
-                <h2>Cupón agregado</h2>
-        </div>
-    </div>
-
     <!-- Botón de Carrito -->
     <button class="cart-button" id="cartButton">🛒<span id="cartCount" class="cart-count">0</span></button>
 
 </body>
 </html>
-
-@section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var couponModal = document.getElementById("couponAddedModal");
-
-            function showCouponModal() {
-                couponModal.style.display = "block";
-                couponModal.classList.add('scaleIn');
-                setTimeout(function () {
-                    couponModal.classList.remove('scaleIn');
-                    couponModal.classList.add('scaleOut');
-                    setTimeout(function () {
-                        couponModal.style.display = "none";
-                        couponModal.classList.remove('scaleOut');
-                    }, 500); // Tiempo de la animación scaleOut
-                }, 2000); // Tiempo que el modal está visible
-            }
-
-            // Agrega evento a cada tarjeta de cupón
-            document.querySelectorAll('.card').forEach(function (card) {
-                card.addEventListener('click', function () {
-                    showCouponModal();
-                });
-            });
-        });
-    </script>
-}

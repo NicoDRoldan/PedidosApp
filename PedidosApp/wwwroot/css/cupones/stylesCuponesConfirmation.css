@@ -1,0 +1,81 @@
+/* Estilos para el fondo oscurecido */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    animation: fadeIn 0.5s;
+}
+
+/* Modal Content */
+.modal-content {
+    margin: -5% auto; /* 15% from the top and centered */
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Smaller width */
+    height: 20%; /* Smaller height */
+    max-width: 400px;
+    max-height: 200px;
+    animation: scaleIn 0.2s;
+    transform: translateY(-0%);
+    text-align: center;
+    align-content: center;
+    align-items: center;
+}
+
+    .modal-content .checkmark {
+        margin-top:20px;
+        font-size: 50px;
+        color: green;
+    }
+
+    .modal-content h2 {
+        font-size: 24px;
+        color: black;
+    }
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.5);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleOut {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0.5);
+    }
+}
