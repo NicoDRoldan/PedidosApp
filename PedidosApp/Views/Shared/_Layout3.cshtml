@@ -23,6 +23,8 @@
         </nav>
     </header>
 
+    @RenderBody()
+
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="#" class="dropdown-btn">Artículos</a>
@@ -43,14 +45,7 @@
             <a asp-controller="Access" asp-action="Login" class="logout-button">Iniciar Sesión</a> <!-- Enlace para Login -->
             <a asp-controller="Access" asp-action="Register" class="logout-button">Registrarse</a> <!-- Enlace para Register -->
         }
-
     </div>
-
-    @RenderBody()
-
-    @*     <footer>
-    © 2024 Pedidos APP
-    </footer> *@
 
     <script>
         function openNav() {

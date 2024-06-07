@@ -9,10 +9,12 @@ body {
 
 header {
     text-align: center;
+    padding-top:100px;
 }
 
 .container {
-    max-width: 1380px;
+    /*max-width: 1380px;*/
+    max-width: 1500px;
     margin: 0 auto;
     padding: 20px;
     display: flex;
@@ -44,7 +46,23 @@ header {
     border-radius: 5px;
     padding: 15px;
     box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+    margin: 10px;
 }
+
+@media (min-width: 375px) and (max-width: 415px) {
+    .card {
+        position: relative;
+        max-width: 250px;
+        width: 250px;
+        display: flex;
+        background-color: white;
+        border-radius: 5px;
+        padding: 15px;
+        box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+        margin: 10px;
+    }
+}
+
     .card:hover {
         box-shadow: 0 8px 8px rgba(0,0,0,0.2);
     }
@@ -68,32 +86,6 @@ header {
             border: none;
             border-radius: 3%;
         }
-
-.cart-button {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    background-color: #E23E57;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 99;
-}
-
-.cart-count {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: cornflowerblue;
-    color: white;
-    border-radius: 50%;
-    padding: 5px 10px;
-    font-size: 14px;
-}
 
 .discount-circle {
     position: absolute;

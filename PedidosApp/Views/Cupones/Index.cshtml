@@ -4,9 +4,13 @@
     ViewData["Title"] = "Index";
     Layout = "_Layout3";
 }
+
 <link href="~/css/cupones/stylesCupones.css" rel="stylesheet" />
-<link href="~/css/cupones/stylescarritocupones.css" rel="stylesheet" />
 <link href="~/css/cupones/stylescuponesconfirmation.css" rel="stylesheet" />
+@* Global: *@
+<link href="~/css/general/stylescarrito.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +18,6 @@
     <title>Pedidos APP</title>
 </head>
 <body>
-    <h1 class="titulo-menu">Cupones</h1>
 
     <section class="container--section">
         <h2 class="">Promociones</h2>
@@ -24,7 +27,6 @@
                 <a>
                     <div class="card" id="card-@item.Id_Cupon">
                         <div class="card-content">
-                            @* <h3>@item.</h3> *@
                             <div class="discount-circle">@item.PorcentajeDto.ToString("0")%</div>
                             <div class="mcd-store-menu-category-item__title mcd-store-menu-category-item__title--is-clamped">@item.Descripcion</div>
                             <div class="mcd-store-menu-category-item__calories">$@item.PorcentajeDto.ToString("0.00")</div>
@@ -60,44 +62,40 @@
         </div>
     </div>
 
+    <!-- Botón de Carrito -->
+    <button class="cart-button" id="cartButton">
+        <label>🛒</label>
+        <span id="cartCount" class="cart-count">0</span>
+    </button>
+
     <!-- Modal de Cupón Agregado -->
     <div id="couponAddedModal" class="modal">
-        <div class="modal-content">
-                <div class="checkmark">✔️</div>
+        <div class="modal-content-cupon-add">
+            <div class="modal-header-cupon-add">
                 <h2>Cupón agregado</h2>
+            </div>
+            <div class="modal-body-cupon-add">
+                <div class="checkmark">
+                    <img src="~/logos/check-png.png" />
+                </div>
+                <h2>Su número de cupón es:</h2>
+                <h2>123-456-789</h2>
+            </div>
+            <div class="modal-footer-cupon-add">
+                <div id="ver-cupon-modal-container">
+                    <button id="ver-cupon-modal" class="cupon-modal-button">Ver cupón</button>
+                </div>
+                <div id="salir-cupon-modal-container">
+                    <button id="salir-cupon-modal" class="cupon-modal-button">Aceptar</button>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- Botón de Carrito -->
-    <button class="cart-button" id="cartButton">🛒<span id="cartCount" class="cart-count">0</span></button>
 
 </body>
 </html>
 
 @section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var couponModal = document.getElementById("couponAddedModal");
-
-            function showCouponModal() {
-                couponModal.style.display = "block";
-                couponModal.classList.add('scaleIn');
-                setTimeout(function () {
-                    couponModal.classList.remove('scaleIn');
-                    couponModal.classList.add('scaleOut');
-                    setTimeout(function () {
-                        couponModal.style.display = "none";
-                        couponModal.classList.remove('scaleOut');
-                    }, 500); // Tiempo de la animación scaleOut
-                }, 2000); // Tiempo que el modal está visible
-            }
-
-            // Agrega evento a cada tarjeta de cupón
-            document.querySelectorAll('.card').forEach(function (card) {
-                card.addEventListener('click', function () {
-                    showCouponModal();
-                });
-            });
-        });
-    </script>
+    <script src="~/js/cuponesscript.js"></script>
+    <script src="~/js/carritoscript.js"></script>
 }

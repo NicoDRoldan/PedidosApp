@@ -9,17 +9,17 @@ body {
 
 header {
     text-align: center;
+    padding-top: 100px;
 }
 
 .container {
     max-width: 1380px;
     margin: 0 auto;
-    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding-bottom: 100px;
+    margin-bottom: 10px !important;
 }
 
     .container a {
@@ -44,55 +44,94 @@ header {
     padding: 15px;
     box-shadow: 0 4px 4px rgba(0,0,0,0.1);
 }
-    .card:hover {
-        box-shadow: 0 8px 8px rgba(0,0,0,0.2);
-    }
 
-.card-content {
-    flex: 1;
-    width: 50%;
+@media (min-width: 375px) and (max-width: 415px) {
+    .card {
+        position: relative;
+        max-width: 250px;
+        width: 250px;
+        display: flex;
+        background-color: white;
+        border-radius: 5px;
+        padding: 15px;
+        box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+        margin: 10px;
+    }
 }
 
-    .card-content hr{
+.card:hover {
+    box-shadow: 0 8px 8px rgba(0,0,0,0.2);
+}
+
+.card-content {
+    padding-right: 5px;
+    flex: 1;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+    .card-content h3 {
+        margin: 0;
+    }
+
+    .card-content hr {
         color: #333;
     }
 
-    .card-image {
-        width: 50%;
+.card-image {
+    width: 70px;
+    height: 120px;
+    display: flex;
+}
+
+    .card-image img {
+        width: 80px;
+        height: 80px;
+        border: none;
+        border-radius: 5%;
     }
 
-        .card-image img {
-            width: 125px;
-            height: 125px;
-            border: none;
-            border-radius: 3%;
-        }
-
-
-.cart-button {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    background-color: #E23E57;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    cursor: pointer;
+.price {
+    margin-top: auto;
 }
 
-.cart-count {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: cornflowerblue;
-    color: white;
-    border-radius: 50%;
-    padding: 5px 10px;
-    font-size: 14px;
+/* Animaciones de despliegue y repliegue */
+@keyframes expand {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+
+    to {
+        max-height: 1000px; /* Ajustar según el contenido esperado */
+        opacity: 1;
+    }
 }
+
+@keyframes collapse {
+    from {
+        max-height: 1000px; /* Ajustar según el contenido esperado */
+        opacity: 1;
+    }
+
+    to {
+        max-height: 0;
+        opacity: 0;
+    }
+}
+
+.expanding {
+    overflow: hidden;
+    animation: expand 1.0s ease-out forwards;
+}
+
+.collapsing {
+    overflow: hidden;
+    animation: collapse 0.5s ease-out forwards;
+}
+/* Animaciones de despliegue y repliegue */
 
 .modal {
     display: none;
@@ -173,3 +212,33 @@ header {
     .mcd-store-menu-category-item__calories.is-hidden-touch {
         margin-top: 10px;
     }
+
+.mcd-store-menu-category-item__title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Limita el texto a 3 líneas */
+    -webkit-box-orient: vertical;
+}
+/*MC*/
+
+.read-more, .read-less {
+    font-weight: bold;
+    cursor: pointer;
+    display: none; /* Oculto por defecto */
+}
+
+.card.expanded .mcd-store-menu-category-item__title {
+    -webkit-line-clamp: unset; /* Elimina la restricción de líneas */
+}
+
+.card.expanded .read-more {
+    display: none;
+}
+
+.card.expanded .read-less {
+    display: inline;
+}
+
+.read-more {
+    display: inline; /* Muestra el botón "leer más" por defecto */
+}

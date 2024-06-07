@@ -83,7 +83,11 @@ namespace PedidosApp.Controllers
                 return NotFound();
             }
 
-            var articuloModel = await _context.Articulos.FindAsync(id);
+            var articuloModel = await _context.Articulos
+                .Include(a => a.Precio)
+                .Where(a => a.Id_Articulo == id)
+                .FirstOrDefaultAsync();
+
             if (articuloModel == null)
             {
                 return NotFound();
@@ -93,11 +97,48 @@ namespace PedidosApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Articulo,Nombre,Descripcion,Activo,FechaCreacion,Id_Rubro")] ArticuloModel articuloModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id_Articulo,Nombre,Descripcion,Activo,Id_Rubro,Url_Imagen,Precio")]
+            ArticuloModel articuloModel, IFormFile imagen)
         {
             if (id != articuloModel.Id_Articulo)
             {
                 return NotFound();
+            }
+
+            var articuloModelOriginal = await _context.Articulos
+                .Include(a => a.Precio)
+                .AsNoTracking()
+                .Where(a => a.Id_Articulo == id)
+                .FirstOrDefaultAsync();
+
+            if(imagen == null)
+                articuloModel.Url_Imagen = articuloModelOriginal.Url_Imagen;
+            else
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + imagen.FileName;
+                var path = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await imagen.CopyToAsync(stream);
+                }
+
+                articuloModel.Url_Imagen = "/images/" + uniqueFileName;
+            }
+
+            articuloModel.FechaCreacion = articuloModelOriginal.FechaCreacion;
+
+            if(articuloModel.Precio != null)
+            {
+                if(articuloModelOriginal.Precio != null)
+                {
+                    articuloModel.Precio.Id_Articulo = articuloModelOriginal.Precio.Id_Articulo;
+                    _context.Entry(articuloModel.Precio).State = EntityState.Modified;
+                }
+            }
+            else if(articuloModel.Precio == null && articuloModelOriginal.Precio != null)
+            {
+                _context.Entry(articuloModelOriginal.Precio).State = EntityState.Deleted;
             }
 
             try
@@ -141,8 +182,17 @@ namespace PedidosApp.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var articuloModel = await _context.Articulos.FindAsync(id);
+
+            var precioModel = await _context.Precios
+                .FindAsync(id);
+
             if (articuloModel != null)
             {
+                if(precioModel != null)
+                {
+                    _context.Precios.Remove(precioModel);
+                }
+
                 _context.Articulos.Remove(articuloModel);
             }
 

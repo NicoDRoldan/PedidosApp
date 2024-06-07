@@ -46,6 +46,12 @@ builder.Services.AddHttpClient("WSCuponesClient", client =>
     .AddPolicyHandler(GetRetryPolicy())
     .AddPolicyHandler(GetCircuitBreakerPolicy());
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5089); //HTTP
+    options.ListenAnyIP(7006, listenOptions => listenOptions.UseHttps());
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

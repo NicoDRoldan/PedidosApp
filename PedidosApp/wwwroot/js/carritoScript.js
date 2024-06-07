@@ -21,6 +21,8 @@ updateCartCount();
 
 function addToCart(id, name, price) {
 
+    console.log(price);
+
     var imageUrl = document.querySelector(`#card-${id} .image-art`).getAttribute('data-url');
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -46,23 +48,24 @@ function displayCart() {
         let itemTotal = item.quantity * item.price;
         total += itemTotal;
         cartItemsContainer.innerHTML += `
-                        <div class="card-cart">
-                            <div class="card-cart-content">
-                                <div class="card-cart-text">
-                                    <h3>${item.name}</h3>
-                                    <p>Precio: $${item.price.toFixed(2)}</p>
-                                    <p>Cantidad: ${item.quantity}</p>
-                                    <p>Total: $${itemTotal.toFixed(2)}</p>
-                                    <button onclick="updateItemQuantity(${item.id}, ${item.quantity - 1})">-</button>
-                                    <button onclick="updateItemQuantity(${item.id}, ${item.quantity + 1})">+</button>
-                                    <button onclick="removeFromCart(${item.id})">Eliminar</button>
-                                </div>
-                                <div class="card-cart-image">
-                                    <img src="${item.imageUrl}" alt="${item.name}" class="cart-item-image">
-                                </div>
-                            </div>
-                        </div>
-                        `;
+        <div class="card-cart">
+            <div class="card-cart-content">
+                <div class="card-cart-text">
+                    <h3>${item.name}</h3>
+                    <p>Precio: $${item.price.toFixed(2)}</p>
+                    <p>Total: $${itemTotal.toFixed(2)}</p>
+                </div>
+                <div class="card-cart-image">
+                    <img src="${item.imageUrl}" alt="${item.name}" class="cart-item-image">
+                    <div class="quantity-controls">
+                        ${item.quantity === 1 ? `<button class="quantity-button" onclick="removeFromCart(${item.id})"><i class="fas fa-trash-alt"></i></button>` : `<button class="quantity-button" onclick="updateItemQuantity(${item.id}, ${item.quantity - 1})">-</button>`}
+                        <span class="quantity-display">${item.quantity}</span>
+                        <button class="quantity-button" onclick="updateItemQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
     });
 
     totalAmount.innerText = `Total: $${total.toFixed(2)}`;
