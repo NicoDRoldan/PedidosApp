@@ -8,6 +8,7 @@
     <title>@ViewData["Title"] - PedidosApp</title>
 
     <link href="~/css/layout3style.css" rel="stylesheet" />
+    <link href="~/css/general/stylescarrito.css" rel="stylesheet" />
 
 </head>
 
@@ -24,6 +25,33 @@
     </header>
 
     @RenderBody()
+
+    <!-- Modal de Carrito -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Carrito de Compras</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems"></div>
+            </div>
+            <div class="modal-footer">
+                <div id="totalContainer">
+                    <h3 id="totalAmount">Total: $0.00</h3>
+                </div>
+                <div id="payButtonContainer">
+                    <button id="payButton" class="pay-button">PAGAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Carrito -->
+    <button class="cart-button" id="cartButton">
+        <label>🛒</label>
+        <span id="cartCount" class="cart-count">0</span>
+    </button>
 
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -76,6 +104,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/carritoscript.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>

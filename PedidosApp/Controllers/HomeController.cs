@@ -20,7 +20,15 @@ namespace PedidosApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Articulos.Include(a => a.Precio).Where(a => a.Precio.Precio != null && a.Precio.Precio != 0).ToListAsync());
+            var articulosModel = await _context.Articulos
+                .Include(a => a.Precio)
+                .Include(a => a.Rubro)
+                .Include(a => a.Articulos_Categorias)
+                    .ThenInclude(ac => ac.Categoria)
+                .Where(a => a.Precio.Precio != null && a.Precio.Precio != 0)
+                .ToListAsync();
+
+            return View(articulosModel);
         }
 
         public IActionResult Privacy()

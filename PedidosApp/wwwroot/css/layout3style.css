@@ -18,13 +18,13 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
 }
 
 .menu-button {
     font-size: 30px;
     color: #E23E57;
     cursor: pointer;
+    padding: 0 20px;
 }
 
 .navbar-brand {
@@ -91,7 +91,7 @@ body, html {
     }
 
     .sidebar .dropdown-btn.active + .dropdown-container {
-        max-height: 500px; /* Asegúrate de que este valor sea suficiente para el contenido */
+        max-height: 500px; /* Asegï¿½rate de que este valor sea suficiente para el contenido */
     }
 
 

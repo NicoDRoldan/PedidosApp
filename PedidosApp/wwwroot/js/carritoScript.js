@@ -21,7 +21,7 @@ updateCartCount();
 
 function addToCart(id, name, price) {
 
-    console.log(price);
+    console.log("Entré en PRICE", price);
 
     var imageUrl = document.querySelector(`#card-${id} .image-art`).getAttribute('data-url');
 
@@ -51,9 +51,13 @@ function displayCart() {
         <div class="card-cart">
             <div class="card-cart-content">
                 <div class="card-cart-text">
-                    <h3>${item.name}</h3>
-                    <p>Precio: $${item.price.toFixed(2)}</p>
-                    <p>Total: $${itemTotal.toFixed(2)}</p>
+                    <div>
+                        <h3>${item.name}</h3>
+                    </div>
+                    <div>
+                        <p>Precio: $${item.price.toFixed(2)}</p>
+                        <p>Total: $${itemTotal.toFixed(2)}</p>
+                    </div>
                 </div>
                 <div class="card-cart-image">
                     <img src="${item.imageUrl}" alt="${item.name}" class="cart-item-image">

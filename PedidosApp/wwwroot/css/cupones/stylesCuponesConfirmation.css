@@ -29,14 +29,14 @@
     overflow: hidden;
 }
 
-@media (min-width: 1025px) and (max-width: 1366px) {
+@media (min-width: 1025px) and (max-width: 4000px) {
     .modal-content-cupon-add {
         width: 30%;
         height: 60%;
     }
 }
 
-@media (min-width: 375px) and (max-width: 415px) {
+@media (min-width: 375px) and (max-width: 1025px) {
     .modal-content-cupon-add {
         max-width: 300px;
         width: 100%;

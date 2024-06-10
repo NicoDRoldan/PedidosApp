@@ -9,7 +9,6 @@ namespace PedidosApp.Models
         [Key]
         public int Id_Articulo { get; set; }
 
-
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Currency)]
         public decimal Precio { get; set; }

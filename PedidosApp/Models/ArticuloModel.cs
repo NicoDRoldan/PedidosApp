@@ -26,5 +26,7 @@ namespace PedidosApp.Models
         public virtual RubroModel Rubro { get; set; }
 
         public virtual PrecioModel? Precio { get; set; }
+
+        public virtual ICollection<Articulos_CategoriasModel> Articulos_Categorias { get; set; }
     }
 }

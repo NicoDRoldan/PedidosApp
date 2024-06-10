@@ -1,14 +1,16 @@
 ﻿@model IEnumerable<PedidosApp.Models.ArticuloModel>
 
+@using Microsoft.AspNetCore.Html
+@using PedidosApp.Helpers
+
 @{
     ViewData["Title"] = "Index";
     Layout = "_Layout3";
 }
 
+@*Estilos*@
 <link href="~/css/home/styleshome.css" rel="stylesheet" />
-@* Global: *@
 <link href="~/css/general/stylescarrito.css" rel="stylesheet" />
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <!DOCTYPE html>
@@ -18,68 +20,13 @@
 </head>
 <body>
 
-    <section class="container--section">
-        <h2 class="">Promociones</h2>
-        <div class="container">
-            @foreach (var item in Model)
-            {
-                <a onclick="addToCart(@item.Id_Articulo, '@item.Nombre', @item.Precio.Precio.ToString().Replace(',', '.'))">
-                    <div class="card" id="card-@item.Id_Articulo">
-                        <div class="card-content">
-                            <div>
-                                <h3>@item.Nombre</h3>
-                                <div class="mcd-store-menu-category-item__title mcd-store-menu-category-item__title--is-clamped" id="desc-@item.Id_Articulo" data-length="@item.Descripcion.Length">@item.Descripcion</div>
-                                <span class="read-more-container">
-                                    <span class="read-more" id="read-more-@item.Id_Articulo" onclick="event.stopPropagation(); toggleDescription(@item.Id_Articulo)">Leer más</span>
-                                </span>
-                                <span class="read-less-container">
-                                    <span class="read-less" id="read-less-@item.Id_Articulo" onclick="event.stopPropagation(); toggleDescription(@item.Id_Articulo)">Leer menos</span>
-                                </span>
-                            </div>
-                            <div>
-                                <div class="mcd-store-menu-category-item__calories price">$@item.Precio.Precio.ToString("0.00")</div>
-                            </div>
-                        </div>
-                        <div class="card-image">
-                            <img src="@item.Url_Imagen" alt="Imagen" class="image-art" data-url="@item.Url_Imagen">
-                        </div>
-                    </div>
-                </a>
-            }
-        </div>
-    </section>
-
-    <!-- Modal de Carrito -->
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Carrito de Compras</h2>
-                <span class="close" id="closeModal">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div id="cartItems"></div>
-            </div>
-            <div class="modal-footer">
-                <div id="totalContainer">
-                    <h3 id="totalAmount">Total: $0.00</h3>
-                </div>
-                <div id="payButtonContainer">
-                    <button id="payButton" class="pay-button">PAGAR</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Botón de Carrito -->
-    <button class="cart-button" id="cartButton">
-        <label>🛒</label>
-        <span id="cartCount" class="cart-count">0</span>
-    </button>
+    @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model,"Hamburguesas", "Hamburguesas", 4).ToString())
+    @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, "Milanesas", "Milanesas", 4).ToString())
+    @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, "Cafetería", "Cafeteria", 4).ToString())
 
 </body>
 </html>
 
 @section Scripts{
-    <script src="~/js/carritoscript.js"></script>
     <script src="~/js/general/toggledescription.js"></script>
 }
