@@ -20,9 +20,15 @@
 </head>
 <body>
 
-    @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model,"Hamburguesas", "Hamburguesas", 4).ToString())
-    @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, "Milanesas", "Milanesas", 4).ToString())
-    @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, "Cafetería", "Cafeteria", 4).ToString())
+    @foreach (var categoria in ViewBag.CategoriasActivas)
+    {
+        @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, $"{categoria.Nombre}", $"{categoria.Nombre}", 4, "Categoria").ToString())
+    }
+
+    @foreach (var rubro in ViewBag.RubrosActivos)
+    {
+        @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, $"{rubro.Nombre}", $"{rubro.Nombre}", 4,"Rubro").ToString())
+    }
 
 </body>
 </html>

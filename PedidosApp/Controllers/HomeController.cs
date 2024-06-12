@@ -20,6 +20,20 @@ namespace PedidosApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.RubrosActivos = await _context.Rubros.ToListAsync();
+            ViewBag.CategoriasActivas = await _context
+                .Categorias
+                .Join(_context.Articulos_Categorias,
+                    c => c.Id_Categoria,
+                    ac => ac.Id_Categoria,
+                    (c, ac) => new { Categoria = c, ArticuloCategoria = ac })
+                .Join(_context.Articulos,
+                    acc => acc.ArticuloCategoria.Id_Articulo,
+                    a => a.Id_Articulo,
+                    (acc, a) => acc.Categoria) // Proyectar solo la categoría
+                .Distinct() // Para asegurarte de que no haya duplicados
+                .ToListAsync();
+
             var articulosModel = await _context.Articulos
                 .Include(a => a.Precio)
                 .Include(a => a.Rubro)

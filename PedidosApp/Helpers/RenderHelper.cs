@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Html;
+using PedidosApp.Data;
 using PedidosApp.Models;
 using System.Text;
 
@@ -6,12 +7,24 @@ namespace PedidosApp.Helpers
 {
     public static class RenderHelper
     {
-        public static IHtmlContent RenderArticulosPorRubrosSection(IEnumerable<ArticuloModel> articulos, string nombre, string rubro, int cantItems)
+        public static IHtmlContent RenderArticulosPorRubrosSection(IEnumerable<ArticuloModel> articulos, string nombre, string rubro_categoria, int cantItems, string tipo)
         {
-            var items = articulos
-                .Where(a => a.Rubro.Nombre == rubro)
-                .Take(cantItems)
-                .ToList();
+            IEnumerable<ArticuloModel> items = articulos;
+
+            if (tipo == "Rubro")
+            {
+                items = articulos
+                    .Where(a => a.Rubro.Nombre == rubro_categoria)
+                    .Take(cantItems)
+                    .ToList();
+            }
+            else if(tipo == "Categoria")
+            {
+                items = articulos
+                    .Where(ac => ac.Articulos_Categorias.Any(ac => ac.Categoria.Nombre == rubro_categoria))
+                    .Take(cantItems)
+                    .ToList();
+            }
 
             var content = new StringBuilder();
 
