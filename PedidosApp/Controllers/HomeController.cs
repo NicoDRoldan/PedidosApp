@@ -21,6 +21,7 @@ namespace PedidosApp.Controllers
         public async Task<IActionResult> Index()
         {
             ViewBag.RubrosActivos = await _context.Rubros.ToListAsync();
+
             ViewBag.CategoriasActivas = await _context
                 .Categorias
                 .Join(_context.Articulos_Categorias,
@@ -30,8 +31,14 @@ namespace PedidosApp.Controllers
                 .Join(_context.Articulos,
                     acc => acc.ArticuloCategoria.Id_Articulo,
                     a => a.Id_Articulo,
-                    (acc, a) => acc.Categoria) // Proyectar solo la categoría
-                .Distinct() // Para asegurarte de que no haya duplicados
+                    (acc, a) => new { JoinArticuloCategoria = acc, Articulo = a })
+                .Join(_context.Precios,
+                    arp => arp.Articulo.Id_Articulo,
+                    p => p.Id_Articulo,
+                    (arp, p) => new { JoinArticuloPrecio = arp, Precio = p })
+                .Where(p => p.Precio.Precio != null && p.Precio.Precio != 0)
+                .Select(result => result.JoinArticuloPrecio.JoinArticuloCategoria.Categoria)
+                .Distinct()
                 .ToListAsync();
 
             var articulosModel = await _context.Articulos

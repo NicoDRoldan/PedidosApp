@@ -19,12 +19,10 @@ window.onclick = function (event) {
 
 updateCartCount();
 
-function addToCart(id, name, price) {
+function addToCart(rubro_categoria, id, name, price) {
 
-    console.log("Entré en PRICE", price);
-
-    var imageUrl = document.querySelector(`#card-${id} .image-art`).getAttribute('data-url');
-
+    var selector = `#card-${id}-${rubro_categoria} .image-art`;
+    var imageUrl = document.querySelector(selector).getAttribute('data-url');
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let existingItem = cart.find(item => item.id === id);
 

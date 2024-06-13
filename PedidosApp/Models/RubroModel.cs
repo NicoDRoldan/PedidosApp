@@ -10,5 +10,7 @@ namespace PedidosApp.Models
         public int Id_Rubro { get; set; }
 
         public string Nombre { get; set; }
+
+        public string? Url_Imagen { get; set; }
     }
 }

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     descriptions.forEach(desc => {
         const length = desc.getAttribute('data-length');
-        const id = desc.id.split('-')[1];
+        const id = desc.id.split('-')[1] + '-' + desc.id.split('-')[2];
         const readMore = document.getElementById(`read-more-${id}`);
 
         if (length > 30) {
@@ -17,10 +17,17 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function toggleDescription(id) {
+    console.log("ENTRÉ ACÁ EN LA FUNCIÓN TOGGLEDESCRIPTION CON EL ID: ", id);
+
     const card = document.getElementById(`card-${id}`);
     const desc = document.getElementById(`desc-${id}`);
     const readMore = document.getElementById(`read-more-${id}`);
     const readLess = document.getElementById(`read-less-${id}`);
+
+    console.log("CARD: ", card);
+    console.log("desc: ", desc);
+    console.log("readMore: ", readMore);
+    console.log("readLess: ", readLess);
 
     if (card.classList.contains('expanded')) {
         // Iniciar animación de repliegue

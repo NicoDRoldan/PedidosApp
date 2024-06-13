@@ -1,0 +1,42 @@
+/* Ajustes de CSS para el nuevo navbar */
+.category-navbar {
+    width: 100%;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 20px 0;
+}
+
+.category-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.category-item {
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.category-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .category-link:hover {
+        color: #4090C2;
+    }
+
+.category-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+}

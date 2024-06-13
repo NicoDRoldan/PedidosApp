@@ -1,0 +1,155 @@
+﻿.mcd-store-menu-block {
+    background-color: #EDEDED;
+}
+
+@media only screen and (min-width: 1024px) {
+    .mcd-container {
+        padding: 0 10%;
+    }
+}
+
+.mcd-store-menu-block__list {
+    padding: 30px;
+}
+
+.columns.is-variable.is-1 {
+    --columnGap: 0;
+}
+
+.columns.is-variable {
+    margin-left: calc(var(--columnGap) * -1);
+    margin-right: calc(var(--columnGap) * -1);
+}
+
+    .columns.is-variable > .column {
+        padding-left: var(--columnGap);
+        padding-right: var(--columnGap);
+    }
+
+@media print, screen and (min-width: 769px) {
+    .column.is-4, .column.is-4-tablet {
+        flex: none;
+        width: 33.3333333333%;
+    }
+}
+
+.columns:last-child {
+    margin-bottom: -.75rem;
+}
+
+.columns.is-multiline {
+    flex-wrap: wrap;
+}
+
+.columns {
+    margin-top: -.75rem;
+}
+
+ul {
+    list-style: none;
+}
+
+@media print, screen and (min-width: 769px) {
+    .columns:not(.is-desktop) {
+        display: flex;
+    }
+}
+
+@media print, screen and (min-width: 769px) {
+    .column.is-4, .column.is-4-tablet {
+        flex: none;
+        width: 33.3333333333%;
+    }
+}
+
+.mcd-store-menu-block__list .column {
+    padding: 0;
+}
+
+.mcd-store-menu-block__list .mcd-store-menu-category-item {
+    max-height: 80px;
+    flex-direction: row;
+    height: 80px;
+    width: 100%;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.mcd-store-menu-category-item {
+    padding: 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    line-height: normal;
+    transition: all 0.3s ease;
+}
+
+    .mcd-store-menu-category-item:hover {
+        background-color: #e0e0e0;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
+    }
+
+        .mcd-store-menu-category-item:hover .mcd-store-menu-category-item__image img {
+            transform: scale(1.05);
+        }
+
+        .mcd-store-menu-category-item:hover .mcd-store-menu-category-item__title--is-clamped {
+            color: #ff0000; /* Cambia el color del texto al pasar el mouse */
+        }
+
+a {
+    color: #6f6f6f;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.mcd-store-menu-block__list .mcd-store-menu-category-item__image {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    max-height: 80px;
+    transition: transform 0.3s ease;
+}
+
+.mcd-store-menu-category-item .mcd-store-menu-category-item__image img {
+    max-height: 100px;
+    max-width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.mcd-store-menu-block__list .mcd-store-menu-category-item__image img {
+    width: auto;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.mcd-store-menu-category-item .mcd-store-menu-category-item__text-content {
+    text-align: left;
+    font-size: 16px;
+    margin-top: 16px;
+    width: 100%;
+    color: #292929;
+}
+
+@media only screen and (min-width: 1024px) {
+    .mcd-store-menu-category-item .mcd-store-menu-category-item__text-content {
+        padding: 0 25px;
+    }
+}
+
+.mcd-store-menu-block__list .mcd-store-menu-category-item__text-content {
+    margin-left: 14px;
+    display: inline-block;
+}
+
+.mcd-store-menu-category-item .mcd-store-menu-category-item__title--is-clamped {
+    text-overflow: ellipsis;
+    display: block;
+    height: 50px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}

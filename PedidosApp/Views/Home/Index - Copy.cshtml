@@ -11,10 +11,8 @@
 @*Estilos*@
 <link href="~/css/home/styleshome.css" rel="stylesheet" />
 <link href="~/css/general/stylescarrito.css" rel="stylesheet" />
-
+<link href="~/css/home/navbarhome.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-<link href="~/css/home/navbarhomemc.css" rel="stylesheet" />
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +21,19 @@
 </head>
 <body>
 
-    @Html.Raw(RenderHelper.RenderRubrosNav(ViewBag.RubrosActivos).ToString())
+    <nav class="category-navbar">
+        <ul class="category-list">
+            @foreach (var rubro in ViewBag.RubrosActivos)
+            {
+                <li class="category-item">
+                    <a href="#@rubro.Nombre" class="category-link">
+                        <span>@rubro.Nombre</span>
+                        <img src="~/images/12bc1f21-a572-4977-9925-3d69d143aab2_IMG_2852.jpeg" alt="@rubro.Nombre" class="category-icon" />
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
 
     @foreach (var categoria in ViewBag.CategoriasActivas)
     {

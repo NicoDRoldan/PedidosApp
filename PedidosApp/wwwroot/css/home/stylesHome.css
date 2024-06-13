@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
-    font-family: Calibri;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f8f8f8;
@@ -9,7 +9,7 @@ body {
 
 header {
     text-align: center;
-    padding-top: 100px;
+    padding-top: 86px;
 }
 
 .container {
@@ -33,11 +33,11 @@ header {
     }
 }
 
-    .container a {
-        text-decoration: none !important;
-        color: black !important;
-        cursor: pointer;
-    }
+.container a {
+    text-decoration: none !important;
+    color: black !important;
+    cursor: pointer;
+}
 
 .container--section {
     max-width: 1500px;
@@ -47,8 +47,37 @@ header {
 }
 
     .container--section h2 {
-        /*width: 150px;*/
+        font-family: "Speedee", arial, helvetica, sans-serif;
+        color: #292929;
+        word-spacing: 1px;
+        font-weight: 600;
+        font-size: 28px;
         width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+.view-all {
+    font-size: 16px;
+    color: #4090C2;
+    text-decoration: none;
+    position: absolute;
+    left: 28%;
+}
+
+@media (min-width: 300px) and (max-width: 1070px) {
+    .view-all {
+        left: 67%;
+    }
+}
+    .view-all:hover {
+        color: #2F6A8F;
+    }
+
+    .view-all img{
+        margin-left: 5px;
+        width:12px;
     }
 
 .card {
@@ -90,6 +119,7 @@ header {
 
     .card-content h3 {
         margin: 0;
+        font-size: 18px;
     }
 
     .card-content hr {
@@ -111,6 +141,9 @@ header {
 
 .price {
     margin-top: auto;
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
 }
 
 /* Animaciones de despliegue y repliegue */
