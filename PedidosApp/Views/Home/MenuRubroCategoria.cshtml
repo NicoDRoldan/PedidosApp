@@ -27,12 +27,12 @@
 
     @foreach (var categoria in ViewBag.CategoriasActivas)
     {
-        @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, $"{categoria.Id_Categoria}", $"{categoria.Nombre}", 4, "Categoria").ToString())
+        @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, $"{categoria.Nombre}", $"{categoria.Nombre}", 4, "Categoria").ToString())
     }
 
 </body>
 </html>
 
-@section Scripts{
+@section Scripts {
     <script src="~/js/general/toggledescription.js"></script>
 }

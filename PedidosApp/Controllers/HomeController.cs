@@ -52,6 +52,36 @@ namespace PedidosApp.Controllers
             return View(articulosModel);
         }
 
+        [Route("Home/Menu/{id}/{tipo}")]
+        public async Task<IActionResult> PedidosPorRubrosOCategorias(int id, string tipo)
+        {
+            var articulos = await _context.Articulos
+                .Include(r => r.Rubro)
+                .Include(p => p.Precio)
+                .Include(ca => ca.Articulos_Categorias)
+                    .ThenInclude(caa => caa.Categoria)
+                .ToListAsync();
+
+            if (tipo.ToLower() == "rubro")
+            {
+                articulos = articulos
+                    .Where(a => a.Rubro.Id_Rubro == id
+                        && (a.Precio.Precio != 0 && a.Precio.Precio != null)
+                        && a.Activo == true)
+                    .ToList();
+            }
+            else if(tipo.ToLower() == "categoria")
+            {
+                articulos = articulos
+                    .Where(a => a.Articulos_Categorias.Any(ac => ac.Categoria.Id_Categoria == id)
+                        && (a.Precio.Precio != 0 && a.Precio.Precio != null)
+                        && a.Activo == true)
+                    .ToList();
+            }
+
+            return View(articulos);
+        }
+
         public IActionResult Privacy()
         {
             return View();

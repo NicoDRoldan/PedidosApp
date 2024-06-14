@@ -4,9 +4,11 @@
 @using PedidosApp.Helpers
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "PedidosPorRubrosOCategorias";
     Layout = "_Layout3";
 }
+
+<h1>PedidosPorRubrosOCategorias</h1>
 
 @*Estilos*@
 <link href="~/css/home/styleshome.css" rel="stylesheet" />
@@ -23,16 +25,11 @@
 </head>
 <body>
 
-    @Html.Raw(RenderHelper.RenderRubrosNav(ViewBag.RubrosActivos).ToString())
-
-    @foreach (var categoria in ViewBag.CategoriasActivas)
-    {
-        @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, $"{categoria.Id_Categoria}", $"{categoria.Nombre}", 4, "Categoria").ToString())
-    }
+    @Html.Raw(RenderHelper.RenderArticulos(Model).ToString())
 
 </body>
 </html>
 
-@section Scripts{
+@section Scripts {
     <script src="~/js/general/toggledescription.js"></script>
 }
