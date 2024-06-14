@@ -66,6 +66,17 @@ header {
     left: 28%;
 }
 
+@media(min-width: 300px) and (max-width: 500px) {
+    .container--section h2 {
+        font-weight: 600;
+        font-size: 22px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
 @media (min-width: 300px) and (max-width: 1070px) {
     .view-all {
         left: 67%;

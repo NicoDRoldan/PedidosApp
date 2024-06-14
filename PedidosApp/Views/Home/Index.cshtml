@@ -30,11 +30,6 @@
         @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, $"{categoria.Nombre}", $"{categoria.Nombre}", 4, "Categoria").ToString())
     }
 
-    @foreach (var rubro in ViewBag.RubrosActivos)
-    {
-        @Html.Raw(RenderHelper.RenderArticulosPorRubrosSection(Model, $"{rubro.Nombre}", $"{rubro.Nombre}", 4,"Rubro").ToString())
-    }
-
 </body>
 </html>
 
