@@ -8,9 +8,6 @@
     Layout = "_Layout3";
 }
 
-<h1>PedidosPorRubrosOCategorias</h1>
-
-@*Estilos*@
 <link href="~/css/home/styleshome.css" rel="stylesheet" />
 <link href="~/css/general/stylescarrito.css" rel="stylesheet" />
 
@@ -25,7 +22,7 @@
 </head>
 <body>
 
-    @Html.Raw(RenderHelper.RenderArticulos(Model).ToString())
+    @Html.Raw(RenderHelper.RenderArticulos(Model, ViewBag.RubroCategoriaActivos).ToString())
 
 </body>
 </html>

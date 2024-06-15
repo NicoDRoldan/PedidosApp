@@ -18,9 +18,21 @@ namespace PedidosApp.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        private async Task SetViewBagsRubrosCategorias()
         {
-            ViewBag.RubrosActivos = await _context.Rubros.ToListAsync();
+            ViewBag.RubrosActivos = await _context.Rubros
+                .Join(_context.Articulos,
+                    ar => ar.Id_Rubro,
+                    a => a.Id_Rubro,
+                    (ar, a) => new { Rubro = ar, Articulo = a })
+                .Join(_context.Precios,
+                    arp => arp.Articulo.Id_Articulo,
+                    p => p.Id_Articulo,
+                    (arp, p) => new { JoinArticuloPrecio = arp, Precio = p })
+                .Where(p => p.Precio.Precio != null && p.Precio.Precio != 0)
+                .Select(result => result.JoinArticuloPrecio.Rubro)
+                .Distinct()
+                .ToListAsync();
 
             ViewBag.CategoriasActivas = await _context
                 .Categorias
@@ -40,6 +52,11 @@ namespace PedidosApp.Controllers
                 .Select(result => result.JoinArticuloPrecio.JoinArticuloCategoria.Categoria)
                 .Distinct()
                 .ToListAsync();
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            await SetViewBagsRubrosCategorias();
 
             var articulosModel = await _context.Articulos
                 .Include(a => a.Precio)
@@ -69,6 +86,21 @@ namespace PedidosApp.Controllers
                         && (a.Precio.Precio != 0 && a.Precio.Precio != null)
                         && a.Activo == true)
                     .ToList();
+
+                ViewBag.RubroCategoriaActivos = await _context.Rubros
+                    .Join(_context.Articulos,
+                        ar => ar.Id_Rubro,
+                        a => a.Id_Rubro,
+                        (ar, a) => new { Rubro = ar, Articulo = a })
+                    .Join(_context.Precios,
+                        arp => arp.Articulo.Id_Articulo,
+                        p => p.Id_Articulo,
+                        (arp, p) => new { JoinArticuloPrecio = arp, Precio = p })
+                    .Where(rp => rp.Precio.Precio != null && rp.Precio.Precio != 0
+                        && rp.JoinArticuloPrecio.Rubro.Id_Rubro == id)
+                    .Select(result => result.JoinArticuloPrecio.Rubro)
+                    .Distinct()
+                    .ToListAsync();
             }
             else if(tipo.ToLower() == "categoria")
             {
@@ -77,6 +109,26 @@ namespace PedidosApp.Controllers
                         && (a.Precio.Precio != 0 && a.Precio.Precio != null)
                         && a.Activo == true)
                     .ToList();
+
+                ViewBag.RubroCategoriaActivos = await _context
+                    .Categorias
+                    .Join(_context.Articulos_Categorias,
+                        c => c.Id_Categoria,
+                        ac => ac.Id_Categoria,
+                        (c, ac) => new { Categoria = c, ArticuloCategoria = ac })
+                    .Join(_context.Articulos,
+                        acc => acc.ArticuloCategoria.Id_Articulo,
+                        a => a.Id_Articulo,
+                        (acc, a) => new { JoinArticuloCategoria = acc, Articulo = a })
+                    .Join(_context.Precios,
+                        arp => arp.Articulo.Id_Articulo,
+                        p => p.Id_Articulo,
+                        (arp, p) => new { JoinArticuloPrecio = arp, Precio = p })
+                    .Where(cap => cap.Precio.Precio != null && cap.Precio.Precio != 0
+                        && cap.JoinArticuloPrecio.JoinArticuloCategoria.Categoria.Id_Categoria == id)
+                    .Select(result => result.JoinArticuloPrecio.JoinArticuloCategoria.Categoria)
+                    .Distinct()
+                    .ToListAsync();
             }
 
             return View(articulos);

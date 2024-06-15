@@ -47,7 +47,7 @@ namespace PedidosApp.Helpers
                             <div class='card-content'>
                                 <div>
                                     <h3>{item.Nombre}</h3>
-                                    <div class='mcd-store-menu-category-item__title mcd-store-menu-category-item__title--is-clamped' id='desc-{item.Id_Articulo}-{rubro_categoria}' data-length='{item.Descripcion.Length}'>{item.Descripcion}</div>
+                                    <div class='mcd-store-menu-category-item__title data-art-toggle mcd-store-menu-category-item__title--is-clamped' id='desc-{item.Id_Articulo}-{rubro_categoria}' data-length='{item.Descripcion.Length}'>{item.Descripcion}</div>
                                     <span class='read-more-container'>
                                         <span class='read-more' id='read-more-{item.Id_Articulo}-{rubro_categoria}' onclick='event.stopPropagation(); toggleDescription(""{item.Id_Articulo}-{rubro_categoria}"")'>Leer más</span>
                                     </span>
@@ -80,7 +80,7 @@ namespace PedidosApp.Helpers
             content.AppendLine($"<nav class=\"mcd-store-menu-block\">");
             content.AppendLine($"<div class=\"mcd-container\">");
             content.AppendLine($"<div class=\"mcd-store-menu-block__list is-hidden-touch\">");
-            content.AppendLine($"<ul class=\"columns is-multiline is-variable is-1\">");
+            content.AppendLine($"<ul class=\"columns is-multiline is-variable is-1\" id=\"menuList\">");
 
             foreach (var rubro in viewBagRubrosActivos)
             {
@@ -99,6 +99,9 @@ namespace PedidosApp.Helpers
 
             content.AppendLine($@"
                         </ul>
+                        <div class=""toggle-button"">
+                            <span id=""toggleMenu"">Mostrar más</span>
+                        </div>
                     </div>
                 </div>
             </nav>"
@@ -107,16 +110,31 @@ namespace PedidosApp.Helpers
             return new HtmlString(content.ToString());
         }
 
-        public static IHtmlContent RenderArticulos(IEnumerable<ArticuloModel> articulos)
+        public static IHtmlContent RenderArticulos<T>(IEnumerable<ArticuloModel> articulos, IEnumerable<T> rubro_categoriaModel)
         {
             var content = new StringBuilder();
 
-            string rubro_categoria = "";
-
             var cerocerocero = "0.00";
 
+            var rubro_categoria = "";
+
+            if(typeof(T) == typeof(RubroModel))
+            {
+                rubro_categoria = rubro_categoriaModel.Cast<RubroModel>().Select(result => result.Nombre).FirstOrDefault();
+            }
+            else if (typeof(T) == typeof(CategoriaModel))
+            {
+                rubro_categoria = rubro_categoriaModel.Cast<CategoriaModel>()
+                    .Select(result => result.Articulos_Categorias.FirstOrDefault())
+                        .Select(result2 => result2.Categoria.Nombre)
+                    .FirstOrDefault();
+            }
+
             content.AppendLine($"<section class='container--section'>");
+            content.AppendLine($"<h2>{rubro_categoria}</h2>");
             content.AppendLine("<div class='container'>");
+
+            rubro_categoria = rubro_categoria.Replace(" ", "").Trim();
 
             foreach (var item in articulos)
             {
@@ -126,7 +144,7 @@ namespace PedidosApp.Helpers
                             <div class='card-content'>
                                 <div>
                                     <h3>{item.Nombre}</h3>
-                                    <div class='mcd-store-menu-category-item__title mcd-store-menu-category-item__title--is-clamped' id='desc-{item.Id_Articulo}-{rubro_categoria}' data-length='{item.Descripcion.Length}'>{item.Descripcion}</div>
+                                    <div class='mcd-store-menu-category-item__title data-art-toggle mcd-store-menu-category-item__title--is-clamped' id='desc-{item.Id_Articulo}-{rubro_categoria}' data-length='{item.Descripcion.Length}'>{item.Descripcion}</div>
                                     <span class='read-more-container'>
                                         <span class='read-more' id='read-more-{item.Id_Articulo}-{rubro_categoria}' onclick='event.stopPropagation(); toggleDescription(""{item.Id_Articulo}-{rubro_categoria}"")'>Leer más</span>
                                     </span>

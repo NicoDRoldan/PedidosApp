@@ -9,7 +9,7 @@
 }
 
 .mcd-store-menu-block__list {
-    padding: 30px;
+    padding-top: 30px;
 }
 
 .columns.is-variable.is-1 {
@@ -67,6 +67,7 @@ ul {
 }
 
 .mcd-store-menu-block__list .mcd-store-menu-category-item {
+    margin-bottom:10px;
     max-height: 80px;
     flex-direction: row;
     height: 80px;
@@ -152,4 +153,60 @@ a {
     -webkit-box-orient: vertical;
     overflow: hidden;
     transition: color 0.3s ease;
+}
+
+/*Cosas*/
+.toggle-button.hidden {
+    display: none;
+}
+
+.menu-container {
+    overflow: hidden;
+    position: relative;
+}
+
+#menuList {
+    transition: max-height 0.5s ease-in-out;
+}
+
+.toggle-button {
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+@media (max-width: 500px) and (min-width: 200px) {
+    #menuList.collapsed {
+        max-height: calc(3 * 150px); /* Adjust height based on item height */
+        overflow: hidden;
+    }
+
+    #menuList.expanded {
+        max-height: none;
+    }
+
+    #menuList li {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    #menuList.collapsed li:nth-child(n+4) {
+        transform: translateY(-20px);
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+    }
+
+    #menuList.expanded li {
+        transform: translateY(0);
+        opacity: 1;
+        height: auto;
+        padding: initial;
+        margin: initial;
+    }
+    .mcd-store-menu-block__list {
+        padding: 30px;
+    }
 }
