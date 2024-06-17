@@ -131,6 +131,7 @@ namespace PedidosApp.Helpers
             }
 
             content.AppendLine($"<section class='container--section'>");
+            content.AppendLine($"<div class='menu--a--render'> <a href=\"/Home/\">Menú </a> > {rubro_categoria}</div>");
             content.AppendLine($"<h2>{rubro_categoria}</h2>");
             content.AppendLine("<div class='container'>");
 

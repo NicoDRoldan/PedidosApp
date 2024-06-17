@@ -54,6 +54,7 @@ header {
         font-size: 28px;
         width: 100%;
         display: flex;
+        justify-content: space-between;
         align-items: center;
     }
 
@@ -137,21 +138,17 @@ header {
     }
 
 .card-image {
+    width: 70px;
     height: 120px;
     display: flex;
 }
 
     .card-image img {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         border: none;
-        border-radius: 10px;
-        transition: transform 0.3s ease;
+        border-radius: 5%;
     }
-
-        .card-image img:hover {
-            transform: scale(1.1);
-        }
 
 .price {
     margin-top: auto;
@@ -304,24 +301,4 @@ header {
 
 .read-more {
     display: inline; /* Muestra el bot�n "leer m�s" por defecto */
-}
-
-/*Extras*/
-
-.menu--a--render {
-    margin-top:10px;
-    color: #adadad;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-family: "Speedee", arial, helvetica, sans-serif;
-}
-
-    .menu--a--render a {
-        text-decoration: underline;
-    }
-
-@media (min-width: 300px) and (max-width: 1070px) {
-    .menu--a--render {
-        margin-left: 10px;
-    }
 }
