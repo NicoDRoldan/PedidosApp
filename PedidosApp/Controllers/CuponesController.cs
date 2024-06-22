@@ -29,6 +29,7 @@ namespace PedidosApp.Controllers
                 {
                     var cuponJson = await response.Content.ReadAsStringAsync();
                     var cuponModel = JsonConvert.DeserializeObject<List<CuponModel>>(cuponJson);
+
                     return View(cuponModel);
                 }
             }

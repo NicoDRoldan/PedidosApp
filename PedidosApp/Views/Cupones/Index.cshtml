@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<PedidosApp.Models.CuponModel>
 
+@using Microsoft.AspNetCore.Html
+@using PedidosApp.Helpers
+
 @{
     ViewData["Title"] = "Index";
     Layout = "_Layout3";
@@ -19,7 +22,7 @@
 </head>
 <body>
 
-    <section class="container--section">
+@*     <section class="container--section">
         <h2 class="">Promociones</h2>
         <div class="container">
             @foreach (var item in Model)
@@ -39,7 +42,9 @@
                 </a>
             }
         </div>
-    </section>
+    </section> *@
+
+    @Html.Raw(RenderHelper.CuponesPorCategorias(Model).ToString())
 
     <!-- Modal de Cupón Agregado -->
     <div id="couponAddedModal" class="modal">
@@ -71,4 +76,5 @@
 @section Scripts {
     <script src="~/js/cuponesscript.js"></script>
     <script src="~/js/carritoscript.js"></script>
+    <script src="~/js/cupones/carrusel.js"></script>
 }

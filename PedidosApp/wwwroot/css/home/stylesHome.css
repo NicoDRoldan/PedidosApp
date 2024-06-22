@@ -67,6 +67,7 @@ header {
 
 @media(min-width: 300px) and (max-width: 500px) {
     .container--section h2 {
+        padding-left: 20px;
         font-weight: 600;
         font-size: 22px;
         width: 100%;

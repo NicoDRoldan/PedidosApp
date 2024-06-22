@@ -41,8 +41,4 @@
     <_ContentIncludedByDefault Remove="Views\Home\MenuRubroCategoria.cshtml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="Views\Home\MenuRubroCategoria.cshtml" />
-  </ItemGroup>
-
 </Project>

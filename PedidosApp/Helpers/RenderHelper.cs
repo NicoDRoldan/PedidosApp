@@ -3,6 +3,7 @@ using PedidosApp.Data;
 using PedidosApp.Models;
 using System.Security.Policy;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PedidosApp.Helpers
 {
@@ -166,6 +167,56 @@ namespace PedidosApp.Helpers
 
             content.AppendLine("</div>");
             content.AppendLine("</section>");
+
+
+            return new HtmlString(content.ToString());
+        }
+
+        public static IHtmlContent CuponesPorCategorias(IEnumerable<CuponModel> cupones)
+        {
+            // Traer todas las categorias asociadas a los cupones:
+            var categorias = cupones
+                .SelectMany(c => c.Cupones_Categorias.Select(cc => cc.Categoria))
+                .GroupBy(c => c.Id_Categoria)
+                .Select(g => g.First())
+                .ToList();
+
+            var content = new StringBuilder();
+
+            var cerocerocero = "0";
+
+            foreach (var categoria in categorias)
+            {
+                var nomCategoria = categoria.Nombre;
+
+                content.AppendLine($"<section class='container--section'>");
+                content.AppendLine($"<h2>{nomCategoria}</h2>");
+                content.AppendLine("<div class='container'>");
+
+                nomCategoria = categoria.Nombre.Replace(" ", "");
+
+                content.AppendLine("<div class='carousel'>"); // Carousel container
+
+                foreach (var cupon in cupones.Where(c => c.Cupones_Categorias.Any(cc => cc.Categoria.Id_Categoria == categoria.Id_Categoria)).ToList())
+                {
+                    content.AppendLine($@"
+                    <a>
+                        <div class=""card"" id=""card-{cupon.Id_Cupon}"">
+                            <div class=""discount-circle"">%{cupon.PorcentajeDto.ToString(cerocerocero)}</div>
+                            <div class=""card-image"">
+                                <img src=""{cupon.Url_Imagen}"" alt=""Imagen"" class=""image-art"" data-url=""{cupon.Url_Imagen}"">
+                            </div>
+                            <div class=""card-content"">
+                                <div class=""mcd-store-menu-category-item__title"">{cupon.Descripcion}</div>
+                            </div>
+                        </div>
+                    </a>");
+                }
+
+                content.AppendLine("</div>"); // Close carousel container
+                content.AppendLine("</div>");
+                content.AppendLine("</section>");
+            }
 
 
             return new HtmlString(content.ToString());

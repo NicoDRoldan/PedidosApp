@@ -38,10 +38,18 @@ builder.Services.AddHttpClient("PedidosAppiClient", client =>
     client.BaseAddress = new Uri("https://localhost:7273/api");
 });
 
+//// Crear HttpClient para llamado a WebService de Cupones:
+//builder.Services.AddHttpClient("WSCuponesClient", client =>
+//{
+//    client.BaseAddress = new Uri("https://localhost:7159/api");
+//    })
+//    .AddPolicyHandler(GetRetryPolicy())
+//    .AddPolicyHandler(GetCircuitBreakerPolicy());
+
 // Crear HttpClient para llamado a WebService de Cupones:
 builder.Services.AddHttpClient("WSCuponesClient", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7159/api");
+    client.BaseAddress = new Uri("http://localhost:5203/api");
     })
     .AddPolicyHandler(GetRetryPolicy())
     .AddPolicyHandler(GetCircuitBreakerPolicy());

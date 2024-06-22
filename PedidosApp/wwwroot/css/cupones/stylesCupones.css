@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
 body {
-    font-family: Calibri;
     margin: 0;
     padding: 0;
     background-color: #f8f8f8;
@@ -9,26 +6,35 @@ body {
 
 header {
     text-align: center;
-    padding-top:100px;
+    padding-top: 100px;
 }
 
 .container {
-    /*max-width: 1380px;*/
     max-width: 1500px;
     margin: 0 auto;
     padding: 20px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 20px;
-    padding-bottom: 100px;
 }
 
-    .container a {
-        text-decoration: none !important;
-        color: black !important;
-        cursor: pointer;
-    }
+.container a {
+    text-decoration: none !important;
+    color: black !important;
+    cursor: pointer;
+}
+
+.container--section h2 {
+    font-family: "Speedee", arial, helvetica, sans-serif;
+    color: #292929;
+    word-spacing: 1px;
+    font-weight: 600;
+    font-size: 28px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
 
 .container--section {
     max-width: 1500px;
@@ -39,58 +45,85 @@ header {
 
 .card {
     position: relative;
-    max-width: 300px;
-    width: 300px;
+    max-width: 345px;
+    width: 345px;
+    max-height: 400px;
+    height: 400px;
     display: flex;
+    flex-direction: column;
     background-color: white;
     border-radius: 5px;
-    padding: 15px;
-    box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     margin: 10px;
+    overflow: hidden;
+}
+
+.card-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-image img {
+    width: 345px;
+    height: 312px;
+}
+
+.card-content {
+    flex: 0 0 20%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.card {
+    scroll-snap-align: center;
 }
 
 @media (min-width: 375px) and (max-width: 415px) {
     .card {
-        position: relative;
-        max-width: 250px;
-        width: 250px;
+        max-width: 325px;
+        width: 325px;
+    }
+
+    .container--section h2 {
+        font-family: "Speedee", arial, helvetica, sans-serif;
+        color: #292929;
+        word-spacing: 1px;
+        font-weight: 600;
+        font-size: 28px;
+        width: 100%;
         display: flex;
-        background-color: white;
-        border-radius: 5px;
-        padding: 15px;
-        box-shadow: 0 4px 4px rgba(0,0,0,0.1);
-        margin: 10px;
+        align-items: center;
     }
+    
 }
 
-    .card:hover {
-        box-shadow: 0 8px 8px rgba(0,0,0,0.2);
-    }
-
-.card-content {
-    flex: 1;
-    width: 50%;
+.card:hover {
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
 }
 
-    .card-content hr{
-        color: #333;
-    }
-
-    .card-image {
-        width: 50%;
-    }
-
-        .card-image img {
-            width: 125px;
-            height: 125px;
-            border: none;
-            border-radius: 3%;
-        }
+.mcd-store-menu-category-item__title {
+    font-size: 16px;
+    font-weight: bold;
+}
 
 .discount-circle {
     position: absolute;
-    top: -27px;
-    right: -25px;
+    top: 5px;
+    right: 5px;
     background: linear-gradient(135deg, #ff416c, #ff4b2b);
     color: white;
     border-radius: 50%;

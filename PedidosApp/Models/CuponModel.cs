@@ -15,5 +15,7 @@
         public string TipoCupon { get; set; }
 
         public string? Url_Imagen { get; set; }
+
+        public virtual ICollection<CuponCategoriaModel> Cupones_Categorias { get; set; }
     }
 }

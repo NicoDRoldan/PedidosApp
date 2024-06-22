@@ -52,13 +52,6 @@
         height: 80px;
     }
 
-.modal-content-cupon-add h2 {
-    font-size: 24px;
-    color: black;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
 .modal-header-cupon-add, .modal-footer-cupon-add {
     background-color: #f1f1f1;
     padding: 10px;
@@ -90,6 +83,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start; /* Alinea al inicio para permitir desplazamiento */
+}
+
+.modal-body-cupon-add h2 {
+    font-family: "Speedee", arial, helvetica, sans-serif;
+    color: #292929;
+    font-size: 20px;
+    margin-bottom:0;
 }
 
 .modal-footer-cupon-add {
