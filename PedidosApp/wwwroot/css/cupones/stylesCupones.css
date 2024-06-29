@@ -76,6 +76,9 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
+    font-family: Bahnschrift;
+    color: #414141;
+    font-size: 20px;
 }
 
 .carousel {
@@ -99,7 +102,7 @@ header {
     }
 
     .container--section h2 {
-        font-family: "Speedee", arial, helvetica, sans-serif;
+        font-family: "Speedee", Bahnschrift;
         color: #292929;
         word-spacing: 1px;
         font-weight: 600;
@@ -107,6 +110,12 @@ header {
         width: 100%;
         display: flex;
         align-items: center;
+    }
+
+    .card-content {
+        font-family: Bahnschrift;
+        color: #414141;
+        font-size: 20px;
     }
     
 }

@@ -16,6 +16,8 @@
 
         public string? Url_Imagen { get; set; }
 
+        public bool Activo { get; set; }
+
         public virtual ICollection<CuponCategoriaModel> Cupones_Categorias { get; set; }
     }
 }

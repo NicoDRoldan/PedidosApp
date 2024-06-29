@@ -207,7 +207,7 @@ namespace PedidosApp.Helpers
                                 <img src=""{cupon.Url_Imagen}"" alt=""Imagen"" class=""image-art"" data-url=""{cupon.Url_Imagen}"">
                             </div>
                             <div class=""card-content"">
-                                <div class=""mcd-store-menu-category-item__title"">{cupon.Descripcion}</div>
+                                <div class="""">{cupon.Descripcion}</div>
                             </div>
                         </div>
                     </a>");
