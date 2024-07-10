@@ -27,8 +27,11 @@ namespace PedidosApp.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+                    var tiposCupones = new List<string> { "PROMO", "PRECIOFIJO" };
+
                     var cuponJson = await response.Content.ReadAsStringAsync();
-                    var cuponModel = JsonConvert.DeserializeObject<List<CuponModel>>(cuponJson);
+                    var cuponModel = JsonConvert.DeserializeObject<List<CuponModel>>(cuponJson)
+                        .Where(c => tiposCupones.Contains(c.TipoCupon));
 
                     return View(cuponModel);
                 }

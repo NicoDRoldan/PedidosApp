@@ -199,10 +199,17 @@ namespace PedidosApp.Helpers
 
                 foreach (var cupon in cupones.Where(c => c.Cupones_Categorias.Any(cc => cc.Categoria.Id_Categoria == categoria.Id_Categoria)).ToList())
                 {
+                    string discountCircle;
+
+                    if (cupon.TipoCupon == "PRECIOFIJO")
+                        discountCircle = $"${cupon.ImportePromo.ToString(cerocerocero)}";
+                    else
+                        discountCircle = $"%{cupon.PorcentajeDto.ToString(cerocerocero)}";
+
                     content.AppendLine($@"
                     <a>
                         <div class=""card"" id=""card-{cupon.Id_Cupon}"">
-                            <div class=""discount-circle"">%{cupon.PorcentajeDto.ToString(cerocerocero)}</div>
+                            <div class=""discount-circle"">{discountCircle}</div>
                             <div class=""card-image"">
                                 <img src=""{cupon.Url_Imagen}"" alt=""Imagen"" class=""image-art"" data-url=""{cupon.Url_Imagen}"">
                             </div>
